@@ -1,5 +1,4 @@
 "use client";
-
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import {
   Dropdown,
@@ -67,7 +66,7 @@ export default function NextUiDropdown(props: INextUiDropdownProps) {
     setCurrentQuery((old) => old + event.key);
   };
 
-  const createDropdownItems = (): Array<JSX.Element> => {
+  const createDropdownItems = (): any => {
     const arr: React.JSX.Element[] = [];
 
     if (searchResult.length > 0) {
@@ -126,7 +125,7 @@ export default function NextUiDropdown(props: INextUiDropdownProps) {
         disallowEmptySelection
         selectionMode="single"
         selectedKeys={selectedKeys}
-        // @ts-ignore
+        // @ts-ignore: Unreachable code error
         onSelectionChange={setSelectedKeys}
       >
         <DropdownItem key="search" textValue="" isReadOnly>

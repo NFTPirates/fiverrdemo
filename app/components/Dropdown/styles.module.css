@@ -3,3 +3,11 @@
   flex-direction: row;
   justify-content: space-between;
 }
+
+.dropDownTrigger__button__content {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}

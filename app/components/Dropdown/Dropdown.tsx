@@ -1,5 +1,11 @@
 "use client";
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, {
+  Dispatch,
+  SetStateAction,
+  use,
+  useEffect,
+  useState,
+} from "react";
 import {
   Dropdown,
   DropdownTrigger,
@@ -11,28 +17,47 @@ import {
 import { SearchIcon } from "../SearchIcon";
 import { Coin } from "../../types/coin";
 import { CoinSearchResponse } from "../../types/coingecko/searchCoinResponse";
-import { Coiny } from "next/font/google/index";
-import Image from "next/image";
+import { GetCoinResponse } from "@/app/types/coingecko/getCoinResponse";
+import { Image } from "@nextui-org/react";
 import styles from "./styles.module.css";
+import { IConversionCoin } from "../Conversion/Conversion";
 
 interface INextUiDropdownProps {
   trendingCoins: Coin[];
-  setSelectedCoin: Dispatch<SetStateAction<string | undefined>>;
+  setSelectedCoin: Dispatch<SetStateAction<GetCoinResponse | undefined>>;
+  initialValue: string;
+  coin: GetCoinResponse | undefined;
 }
 
 export default function NextUiDropdown(props: INextUiDropdownProps) {
-  const [selectedKeys, setSelectedKeys] = useState(new Set(["texxt"]));
-  const [currentQuery, setCurrentQuery] = useState("");
-  const [searchResult, setSearchResult] = useState(new Array<Coin>());
-  const selectedValue = React.useMemo(
-    () => Array.from(selectedKeys).join(", ").replaceAll("_", " "),
-    [selectedKeys]
+  const [selectedKeys, setSelectedKeys] = useState(
+    new Set([props.initialValue])
   );
+  const [currentQuery, setCurrentQuery] = useState("");
+  const [dropdownSelectedCoin, setDropdownSelectedCoin] =
+    useState<GetCoinResponse>();
+
+  const [searchResult, setSearchResult] = useState(new Array<Coin>());
+
+  useEffect(() => {
+    setDropdownSelectedCoin(props.coin);
+  }, [props.coin]);
 
   useEffect(() => {
     const selected = selectedKeys.keys().next().value;
-    console.log(selected, "selected");
-    props.setSelectedCoin(selected);
+
+    const getCoinData = async () => {
+      const result = await fetch(`api/coin/${selected}`);
+
+      if (result.ok) {
+        const data = (await result.json()).queryResponse as GetCoinResponse;
+        setDropdownSelectedCoin(data);
+        console.log(data, "data");
+        props.setSelectedCoin(data);
+      }
+    };
+
+    getCoinData();
   }, [selectedKeys]);
 
   useEffect(() => {
@@ -65,14 +90,13 @@ export default function NextUiDropdown(props: INextUiDropdownProps) {
 
     setCurrentQuery((old) => old + event.key);
   };
-
   const createDropdownItems = (): any => {
     const arr: React.JSX.Element[] = [];
 
     if (searchResult.length > 0) {
       searchResult.map((coin) => {
         arr.push(
-          <DropdownItem key={coin.symbol}>
+          <DropdownItem key={coin.id}>
             <div className={styles.coinContainer}>
               {coin.thumb && (
                 <Image
@@ -91,7 +115,7 @@ export default function NextUiDropdown(props: INextUiDropdownProps) {
     } else {
       props.trendingCoins.map((coin) => {
         arr.push(
-          <DropdownItem key={coin.symbol}>
+          <DropdownItem key={coin.id}>
             <div className={styles.coinContainer}>
               {coin.thumb && (
                 <Image
@@ -115,8 +139,11 @@ export default function NextUiDropdown(props: INextUiDropdownProps) {
   return (
     <Dropdown>
       <DropdownTrigger>
-        <Button variant="light" size="lg" className="capitalize">
-          {selectedValue}
+        <Button variant="light" size="lg" className="capitalize px-3">
+          <div className={styles.dropDownTrigger__button__content}>
+            <Image src={dropdownSelectedCoin?.image?.thumb}></Image>
+            <p>{dropdownSelectedCoin?.symbol}</p>
+          </div>
         </Button>
       </DropdownTrigger>
       <DropdownMenu

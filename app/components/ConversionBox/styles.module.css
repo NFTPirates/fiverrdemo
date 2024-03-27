@@ -1,7 +1,18 @@
-.container {
-  display: flex;
-}
-
 .container__input {
   -webkit-appearance: none;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  background-color: black;
+  padding: 20px;
+  border-radius: 20px;
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .container {
+    width: 45%;
+  }
 }

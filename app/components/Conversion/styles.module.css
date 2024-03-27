@@ -3,11 +3,20 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 80%;
+  padding: 30px 50px;
+  background-color: grey;
+  margin-top: -150px;
+  z-index: 1;
 }
 
 .container__conversionBoxes {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 50px;
+  align-items: center;
 }
 
 .container__content {
@@ -16,4 +25,26 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
+}
+
+.container__content__section {
+  display: flex;
+  flex-direction: row;
+}
+
+.container__conversionBoxes__button {
+  height: 80px;
+  width: 80px;
+  margin: 20px 0;
+}
+
+@media (min-width: 1024px) {
+  .container__conversionBoxes {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .container__conversionBoxes__button {
+    margin: 0 20px;
+  }
 }

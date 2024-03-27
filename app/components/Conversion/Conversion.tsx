@@ -29,9 +29,7 @@ export default function Conversion(props: IConversionBoxProps) {
     const coin2Price = coin2Data?.market_data.current_price.usd;
 
     if (coin1Price && coin2Price) {
-      console.log("test");
       const conv = (coin1Price * coin1Amount) / coin2Price;
-      console.log(conv, "conv");
       setCoin2Amount(conv);
     }
   }, [coin1Data, coin2Data]);
@@ -41,15 +39,12 @@ export default function Conversion(props: IConversionBoxProps) {
     const coin2Price = coin2Data?.market_data.current_price.usd;
 
     if (coin1Price && coin2Price) {
-      console.log("test3");
       const conv = (coin1Price * coin1Amount) / coin2Price;
-      console.log(conv, "conv");
       setCoin2Amount(conv);
     }
   }, [coin1Amount]);
 
   const handleSwitchButton = () => {
-    console.log("tesssst");
     const coin1 = coin1Data;
     setCoin1Data(coin2Data);
     setCoin2Data(coin1);

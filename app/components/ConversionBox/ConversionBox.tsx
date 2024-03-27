@@ -22,7 +22,6 @@ export default function ConversionBox(props: IConversionBoxProps) {
   );
 
   const handleValueChange = (value: string) => {
-    console.log("test1");
     setInputAmount(value);
     props.setCoinAmount(Number(value));
   };

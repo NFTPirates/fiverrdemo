@@ -2,14 +2,17 @@
 import { Coin } from "@/app/types/coin";
 import { GetCoinResponse } from "@/app/types/coingecko/getCoinResponse";
 import { Button } from "@nextui-org/react";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import ConversionBox from "../ConversionBox/ConversionBox";
-import { SearchIcon } from "../SearchIcon";
 import { SwitchIcon } from "../SwitchIcon";
 import styles from "./styles.module.css";
 
 interface IConversionBoxProps {
   trendingCoins: Coin[];
+  coinsSymbols?: string[];
+  startingCoin1Symbol?: string;
+  startingCoin2Symbol?: string;
 }
 
 export interface IConversionCoin {
@@ -46,7 +49,7 @@ export default function Conversion(props: IConversionBoxProps) {
         <ConversionBox
           trendingCoins={props.trendingCoins}
           setCoin={setCoin1Data}
-          initialValue={"bitcoin"}
+          initialValue={props.startingCoin1Symbol ?? "bitcoin"}
           key={"coin1"}
           coin={coin1Data}
           coinAmount={coin1Amount}
@@ -64,7 +67,7 @@ export default function Conversion(props: IConversionBoxProps) {
         <ConversionBox
           trendingCoins={props.trendingCoins}
           setCoin={setCoin2Data}
-          initialValue={"usd-coin"}
+          initialValue={props.startingCoin2Symbol ?? "usd-coin"}
           key={"coin2"}
           coin={coin2Data}
           coinAmount={coin2Amount}
@@ -77,7 +80,14 @@ export default function Conversion(props: IConversionBoxProps) {
           <p>{`${coin1Amount} ${coin1Data?.symbol} = ${coin2Amount} ${coin2Data?.symbol}`}</p>
         </div>
 
-        <Button>View Conversion</Button>
+        <Button
+          href={`${coin1Data?.symbol}-${coin2Data?.symbol}`}
+          as={Link}
+          color="primary"
+          variant="solid"
+        >
+          View Conversion
+        </Button>
       </div>
     </div>
   );

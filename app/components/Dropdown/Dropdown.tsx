@@ -95,7 +95,7 @@ export default function NextUiDropdown(props: INextUiDropdownProps) {
     if (searchResult.length > 0) {
       searchResult.map((coin) => {
         arr.push(
-          <DropdownItem key={coin.id}>
+          <DropdownItem key={coin.id} textValue={"test"}>
             <div className={styles.coinContainer}>
               {coin.thumb && (
                 <Image src={coin.thumb} alt={""} width={20} height={20}></Image>
@@ -109,7 +109,7 @@ export default function NextUiDropdown(props: INextUiDropdownProps) {
     } else {
       props.trendingCoins.map((coin) => {
         arr.push(
-          <DropdownItem key={coin.id}>
+          <DropdownItem key={coin.id} textValue={"test"}>
             <div className={styles.coinContainer}>
               {coin.thumb && (
                 <Image
@@ -149,7 +149,7 @@ export default function NextUiDropdown(props: INextUiDropdownProps) {
         // @ts-ignore: Unreachable code error
         onSelectionChange={setSelectedKeys}
       >
-        <DropdownItem key="search" textValue="" isReadOnly>
+        <DropdownItem key="search" textValue="test" isReadOnly>
           <Input
             classNames={{
               base: "max-w-full sm:max-w-[10rem] h-10",

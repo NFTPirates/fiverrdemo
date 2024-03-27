@@ -1,8 +1,14 @@
-import { Coin } from "./types/coin";
-import { getTrendingCoinsResponse } from "./types/coingecko/trendingCoinsResponse";
 import styles from "./styles.module.css";
-import Conversion from "./components/Conversion/Conversion";
 import Image from "next/image";
+import Conversion from "../components/Conversion/Conversion";
+import { getTrendingCoinsResponse } from "../types/coingecko/trendingCoinsResponse";
+import { Coin } from "../types/coin";
+
+interface IGetAllCoinsResponse {
+  id: string;
+  symbol: string;
+  name: string;
+}
 
 async function getTrendingCoins() {
   const trendingURL = "https://pro-api.coingecko.com/api/v3/search/trending";
@@ -21,8 +27,35 @@ async function getTrendingCoins() {
   return res.json();
 }
 
-export default async function Home() {
+async function getAllCoins(): Promise<IGetAllCoinsResponse[]> {
+  const url = "https://pro-api.coingecko.com/api/v3/coins/list";
+
+  const res = await fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+      "x-cg-pro-api-key": process.env.CG_API_KEY!,
+    },
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+
+  return res.json();
+}
+
+export default async function Page({ params }: { params: { pair: string } }) {
+  const coinsPairArray = params.pair.split("-");
   const data = await getTrendingCoins();
+  const allCoins = await getAllCoins();
+
+  const coin1 = allCoins?.find((coin) => coin.symbol === coinsPairArray[0]);
+
+  const coin2 = allCoins?.find((coin) => coin.symbol === coinsPairArray[1]);
+
+  if (!coin1 || !coin2) {
+    throw new Error("something went wrong");
+  }
 
   const coins = data.coins.map(
     (trendingCoin: { item: getTrendingCoinsResponse }) => {
@@ -35,7 +68,6 @@ export default async function Home() {
       return coin;
     }
   );
-
   return (
     <main>
       <div className={styles.container}>
@@ -49,7 +81,11 @@ export default async function Home() {
             Convert your fiat coins to crypto and vice verse
           </h2>
         </div>
-        <Conversion trendingCoins={coins.slice(1, 10)}></Conversion>
+        <Conversion
+          trendingCoins={coins.slice(1, 10)}
+          startingCoin1Symbol={coin1.id}
+          startingCoin2Symbol={coin2.id}
+        ></Conversion>
       </div>
     </main>
   );

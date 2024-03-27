@@ -52,6 +52,7 @@ export default function NextUiDropdown(props: INextUiDropdownProps) {
       if (result.ok) {
         const data = (await result.json()).queryResponse as GetCoinResponse;
         setDropdownSelectedCoin(data);
+        setCurrentQuery("");
         props.setSelectedCoin(data);
       }
     };
@@ -64,6 +65,7 @@ export default function NextUiDropdown(props: INextUiDropdownProps) {
   }, []);
 
   useEffect(() => {
+    console.log(currentQuery, "queryy");
     const queryApi = async () => {
       const result = await fetch(`api/convert/search?query=${currentQuery}`);
 

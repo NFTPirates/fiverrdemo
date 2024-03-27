@@ -58,13 +58,7 @@ export default async function Home() {
     <main>
       <div className={styles.container}>
         <div className={styles.container__header}>
-          <Image
-            src={"./wave.svg"}
-            quality={100}
-            fill
-            objectFit="cover"
-            alt={""}
-          ></Image>
+          <Image src={"./wave.svg"} quality={100} fill alt={""}></Image>
 
           <h1 className={styles.container__header__title}>
             Global Crypto Converter

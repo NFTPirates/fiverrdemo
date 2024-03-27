@@ -21,28 +21,18 @@ export default function Conversion(props: IConversionBoxProps) {
   const [coin1Data, setCoin1Data] = useState<GetCoinResponse>();
   const [coin2Data, setCoin2Data] = useState<GetCoinResponse>();
 
-  const [coin1Amount, setCoin1Amount] = useState<number>(1);
+  const [coin1Amount, setCoin1Amount] = useState<number | undefined>(1);
   const [coin2Amount, setCoin2Amount] = useState<number>();
 
   useEffect(() => {
     const coin1Price = coin1Data?.market_data.current_price.usd;
     const coin2Price = coin2Data?.market_data.current_price.usd;
 
-    if (coin1Price && coin2Price) {
+    if (coin1Price && coin2Price && coin1Amount) {
       const conv = (coin1Price * coin1Amount) / coin2Price;
       setCoin2Amount(conv);
     }
-  }, [coin1Data, coin2Data]);
-
-  useEffect(() => {
-    const coin1Price = coin1Data?.market_data.current_price.usd;
-    const coin2Price = coin2Data?.market_data.current_price.usd;
-
-    if (coin1Price && coin2Price) {
-      const conv = (coin1Price * coin1Amount) / coin2Price;
-      setCoin2Amount(conv);
-    }
-  }, [coin1Amount]);
+  }, [coin1Data, coin2Data, coin1Amount]);
 
   const handleSwitchButton = () => {
     const coin1 = coin1Data;
@@ -57,7 +47,6 @@ export default function Conversion(props: IConversionBoxProps) {
           trendingCoins={props.trendingCoins}
           setCoin={setCoin1Data}
           initialValue={"bitcoin"}
-          initialAmount={"1"}
           key={"coin1"}
           coin={coin1Data}
           coinAmount={coin1Amount}

@@ -98,12 +98,7 @@ export default function NextUiDropdown(props: INextUiDropdownProps) {
           <DropdownItem key={coin.id}>
             <div className={styles.coinContainer}>
               {coin.thumb && (
-                <Image
-                  src={coin.thumb}
-                  alt={"coin logo"}
-                  width={20}
-                  height={20}
-                ></Image>
+                <Image src={coin.thumb} alt={""} width={20} height={20}></Image>
               )}
               <p>{coin.name}</p>
               <p>{coin.symbol}</p>

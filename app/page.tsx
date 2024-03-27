@@ -42,7 +42,6 @@ async function getBtc() {
 export default async function Home() {
   const data = await getTrendingCoins();
 
-  console.log(data.coins);
   const coins = data.coins.map(
     (trendingCoin: { item: getTrendingCoinsResponse }) => {
       const coin: Coin = {

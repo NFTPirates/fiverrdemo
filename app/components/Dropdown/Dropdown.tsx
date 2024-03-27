@@ -52,7 +52,6 @@ export default function NextUiDropdown(props: INextUiDropdownProps) {
       if (result.ok) {
         const data = (await result.json()).queryResponse as GetCoinResponse;
         setDropdownSelectedCoin(data);
-        console.log(data, "data");
         props.setSelectedCoin(data);
       }
     };

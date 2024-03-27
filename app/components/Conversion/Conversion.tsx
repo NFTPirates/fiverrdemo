@@ -85,6 +85,7 @@ export default function Conversion(props: IConversionBoxProps) {
           as={Link}
           color="primary"
           variant="solid"
+          className={styles.container__content__button}
         >
           View Conversion
         </Button>

@@ -21,10 +21,15 @@
 
 .container__content {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   width: 100%;
+}
+
+.container__content__button {
+  width: 100%;
+  margin: 20px 0;
 }
 
 .container__content__section {
@@ -50,5 +55,13 @@
 
   .container__conversionBoxes__button {
     margin: 0 20px;
+  }
+
+  .container__content {
+    flex-direction: row;
+  }
+
+  .container__content__button {
+    width: 20%;
   }
 }

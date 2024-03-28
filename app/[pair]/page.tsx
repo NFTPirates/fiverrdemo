@@ -58,9 +58,11 @@ async function getAllCoins(): Promise<IGetAllCoinsResponse[]> {
 }
 
 async function getCoinHistoricPrice(
+  coin1id: string,
+  coin2Symbol: string,
   days = "7"
-): Promise<IGetCoinHistoricPriceResponse> {
-  const url = `https://pro-api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=${days}&interval=daily`;
+): Promise<IGetCoinHistoricPriceResponse | undefined> {
+  const url = `https://pro-api.coingecko.com/api/v3/coins/${coin1id}/market_chart?vs_currency=${coin2Symbol}&days=${days}&interval=daily`;
 
   const res = await fetch(url, {
     headers: {
@@ -70,7 +72,8 @@ async function getCoinHistoricPrice(
   });
 
   if (!res.ok) {
-    throw new Error("Failed to fetch data");
+    console.log("Failed to fetch data");
+    return undefined;
   }
 
   return res.json();
@@ -78,27 +81,14 @@ async function getCoinHistoricPrice(
 
 export default async function Page({ params }: { params: { pair: string } }) {
   const coinsPairArray = params.pair.split("-");
+  // get all coins
+  // find coin1/2
+  // ge
 
-  const [
-    trendingCoinsResponse,
-    allCoinsListResponse,
-    coinsHistoricPriceResponse,
-  ] = await Promise.all([
+  const [trendingCoinsResponse, allCoinsListResponse] = await Promise.all([
     getTrendingCoins(),
     getAllCoins(),
-    getCoinHistoricPrice("30"),
   ]);
-
-  const coinHistoryChartData: ICoinHistoricPriceChartData[] = new Array();
-
-  if (coinsHistoricPriceResponse) {
-    coinsHistoricPriceResponse.prices.map((priceData) => {
-      coinHistoryChartData.push({
-        date: new Date(priceData[0]).toLocaleDateString(),
-        price: Number(priceData[1]),
-      });
-    });
-  }
 
   const coin1 = allCoinsListResponse?.find(
     (coin) => coin.symbol === coinsPairArray[0]
@@ -110,6 +100,22 @@ export default async function Page({ params }: { params: { pair: string } }) {
 
   if (!coin1 || !coin2) {
     throw new Error("something went wrong");
+  }
+
+  const coinHistoryChartData: ICoinHistoricPriceChartData[] = new Array();
+  const coinsHistoricPriceResponse = await getCoinHistoricPrice(
+    coin1?.id,
+    coin2?.symbol,
+    "7"
+  );
+
+  if (coinsHistoricPriceResponse) {
+    coinsHistoricPriceResponse.prices.map((priceData) => {
+      coinHistoryChartData.push({
+        date: new Date(priceData[0]).toLocaleDateString(),
+        price: Number(priceData[1]),
+      });
+    });
   }
 
   const coins = trendingCoinsResponse.coins.map(
@@ -141,6 +147,8 @@ export default async function Page({ params }: { params: { pair: string } }) {
         ></Conversion>
         <CoinsAreaChart
           coinsHistoricPriceResponse={coinHistoryChartData}
+          coin1Id={coin1.id}
+          coind2Symbol={coin2.symbol}
         ></CoinsAreaChart>
       </div>
     </main>

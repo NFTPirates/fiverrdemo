@@ -16,6 +16,8 @@ import { RadioGroup, Radio } from "@nextui-org/react";
 
 export default function CoinsAreaChart(props: {
   coinsHistoricPriceResponse: ICoinHistoricPriceChartData[];
+  coin1Id: string;
+  coind2Symbol: string;
 }) {
   const [selected, setSelected] = React.useState("7");
   const [updatedChartData, setUpdatedChartData] = React.useState();
@@ -23,11 +25,12 @@ export default function CoinsAreaChart(props: {
   useEffect(() => {
     const getChartData = async () => {
       const result = await fetch(
-        `/api/coin/bitcoin/marketChart?days=${selected}`
+        `/api/coin/${props.coin1Id}/marketChart?days=${selected}&currency=${props.coind2Symbol}`
       );
 
       if (!result.ok) {
-        throw new Error("Failed to fetch data");
+        console.log("failed to fetch");
+        return;
       }
 
       setUpdatedChartData(await result.json());
@@ -36,46 +39,50 @@ export default function CoinsAreaChart(props: {
     getChartData();
   }, [selected]);
 
-  return (
-    <div className={styles.chartContainer}>
-      <div className={styles.chartContainer__header}>
-        <h2 className={styles.chartContainer__header__title}>
-          BTC to USD daily chart
-        </h2>
-        <RadioGroup
-          orientation="horizontal"
-          value={selected}
-          onValueChange={setSelected}
-        >
-          <Radio value="7">7d</Radio>
-          <Radio value="30">30d</Radio>
-        </RadioGroup>
-      </div>
-      <div className={styles.chartContainer__chart}>
-        <ResponsiveContainer>
-          <AreaChart
-            width={500}
-            height={400}
-            data={updatedChartData ?? props.coinsHistoricPriceResponse}
-            margin={{
-              top: 10,
-              right: 30,
-              left: 0,
-              bottom: 0,
-            }}
+  if (props.coinsHistoricPriceResponse.length && updatedChartData) {
+    return (
+      <div className={styles.chartContainer}>
+        <div className={styles.chartContainer__header}>
+          <h2 className={styles.chartContainer__header__title}>
+            BTC to USD daily chart
+          </h2>
+          <RadioGroup
+            className={styles.chartContainer__header__radio}
+            color="danger"
+            orientation="horizontal"
+            value={selected}
+            onValueChange={setSelected}
           >
-            <XAxis dataKey="date" />
-            <YAxis />
-            <Tooltip />
-            <Area
-              type="monotone"
-              dataKey="price"
-              stroke="#8884d8"
-              fill="#8884d8"
-            />
-          </AreaChart>
-        </ResponsiveContainer>
+            <Radio value="7">7d</Radio>
+            <Radio value="30">30d</Radio>
+          </RadioGroup>
+        </div>
+        <div className={styles.chartContainer__chart}>
+          <ResponsiveContainer>
+            <AreaChart
+              width={500}
+              height={400}
+              data={updatedChartData ?? props.coinsHistoricPriceResponse}
+              margin={{
+                top: 10,
+                right: 30,
+                left: 0,
+                bottom: 0,
+              }}
+            >
+              <XAxis dataKey="date" />
+              <YAxis />
+              <Tooltip />
+              <Area
+                type="monotone"
+                dataKey="price"
+                stroke="#e07a5f"
+                fill="#81b29a"
+              />
+            </AreaChart>
+          </ResponsiveContainer>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }

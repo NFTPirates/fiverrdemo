@@ -40,11 +40,7 @@ export default async function Home() {
     <main>
       <div className={styles.container}>
         <div className={styles.container__header}>
-          <Image src={"./wave.svg"} quality={100} fill alt={""}></Image>
-
-          <h1 className={styles.container__header__title}>
-            Global Crypto Converter
-          </h1>
+          <h1>Global Crypto Converter</h1>
           <h2 className={styles.container__header_subTitle}>
             Convert your fiat coins to crypto and vice verse
           </h2>

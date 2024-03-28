@@ -1,15 +1,22 @@
 import React from "react";
 export const SwitchIcon = () => (
   <svg
-    width="32"
-    height="14"
-    viewBox="0 0 32 14"
-    fill="none"
+    viewBox="-348.16 -348.16 1720.32 1720.32"
     xmlns="http://www.w3.org/2000/svg"
+    fill="#3D405B"
+    stroke="#3D405B"
   >
-    <path
-      d="M22.6 2.28533L24.4853 0.400002L31.0853 7L24.4853 13.6L22.6 11.7147L27.3133 7L22.6 2.28533ZM9.40001 2.28533L4.68667 7L9.40001 11.7147L7.51467 13.6L0.914673 7L7.51467 0.400002L9.40001 2.28533Z"
-      fill="#D98C45"
-    ></path>
+    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+    <g
+      id="SVGRepo_tracerCarrier"
+      stroke-linecap="round"
+      strokeLinejoin="round"
+    ></g>
+    <g id="SVGRepo_iconCarrier">
+      <path
+        fill="#3D405B"
+        d="M118.656 438.656a32 32 0 0 1 0-45.248L416 96l4.48-3.776A32 32 0 0 1 461.248 96l3.712 4.48a32.064 32.064 0 0 1-3.712 40.832L218.56 384H928a32 32 0 1 1 0 64H141.248a32 32 0 0 1-22.592-9.344zM64 608a32 32 0 0 1 32-32h786.752a32 32 0 0 1 22.656 54.592L608 928l-4.48 3.776a32.064 32.064 0 0 1-40.832-49.024L805.632 640H96a32 32 0 0 1-32-32z"
+      ></path>
+    </g>
   </svg>
 );

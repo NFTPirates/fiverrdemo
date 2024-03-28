@@ -77,13 +77,12 @@ export default function Conversion(props: IConversionBoxProps) {
 
       <div className={styles.container__content}>
         <div className={styles.container__content__section}>
-          <p>{`${coin1Amount} ${coin1Data?.symbol} = ${coin2Amount} ${coin2Data?.symbol}`}</p>
+          <h2>{`${coin1Amount} ${coin1Data?.symbol} = ${coin2Amount} ${coin2Data?.symbol}`}</h2>
         </div>
 
         <Button
           href={`${coin1Data?.symbol}-${coin2Data?.symbol}`}
           as={Link}
-          color="primary"
           variant="solid"
           className={styles.container__content__button}
         >

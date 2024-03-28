@@ -5,9 +5,8 @@
   align-items: center;
   width: 80%;
   padding: 30px 50px;
-  background-color: grey;
-  margin-top: -250px;
-  z-index: 1;
+  background-color: var(--background1);
+  border-radius: 15px;
 }
 
 .container__conversionBoxes {
@@ -28,6 +27,7 @@
 }
 
 .container__content__button {
+  background-color: var(--red);
   width: 100%;
   margin: 20px 0;
 }
@@ -41,13 +41,10 @@
   height: 80px;
   width: 80px;
   margin: 20px 0;
+  background-color: var(--red);
 }
 
 @media (min-width: 1024px) {
-  .container {
-    margin-top: -150px;
-  }
-
   .container__conversionBoxes {
     display: flex;
     flex-direction: row;

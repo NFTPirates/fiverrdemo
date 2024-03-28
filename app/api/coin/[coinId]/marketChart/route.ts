@@ -7,9 +7,11 @@ export async function GET(
 ): Promise<NextResponse<any[]>> {
   const searchParams = request.nextUrl.searchParams;
   const days = searchParams.get("days");
+  const currency = searchParams.get("currency");
+
   const coinId = params.coinId;
 
-  const url = `https://pro-api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=usd&days=${days}&interval=daily`;
+  const url = `https://pro-api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=${currency}&days=${days}&interval=daily`;
 
   const res = await fetch(url, {
     headers: {

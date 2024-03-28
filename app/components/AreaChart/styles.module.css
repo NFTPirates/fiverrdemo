@@ -1,6 +1,7 @@
 .chartContainer {
   padding: 20px;
   width: 80%;
+  margin-top: 50px;
 }
 
 .chartContainer__chart {
@@ -8,10 +9,12 @@
   width: 100%;
 }
 
-.chartContainer__radio {
+.chartContainer__header__radio {
   display: flex;
   flex-direction: row;
-  background-color: red;
+  background-color: var(--background1);
+  border-radius: 15px;
+  padding: 10px;
 }
 
 .chartContainer__header {

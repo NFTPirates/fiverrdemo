@@ -1,8 +1,8 @@
 .container {
   display: flex;
-  justify-content: center;
   flex-direction: column;
   align-items: center;
+  height: 100vh;
 }
 
 .container__header {
@@ -10,14 +10,8 @@
   text-align: center;
   width: 100%;
   position: relative;
-  height: 400px;
 }
 
 .container__header__title {
-  font-size: xx-large;
   margin-bottom: 20px;
-}
-
-.container__header__subTitle {
-  font-size: larger;
 }

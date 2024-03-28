@@ -3,9 +3,11 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --foreground: #3d405b;
+  --background: #f4f1de;
+  --background1: #f2cc8f;
+  --red: #e07a5f;
+  --green: #81b29a;
 }
 
 input::-webkit-outer-spin-button,
@@ -13,26 +15,30 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  color: rgb(var(--foreground));
+  background: var(--background);
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+h1 {
+  color: var(--foreground);
+  font-size: xx-large;
+  font-weight: bold;
+}
+
+h2 {
+  color: var(--foreground);
+  font-size: x-large;
+  font-weight: bold;
+}
+
+p {
+  font-weight: normal;
+  font-size: medium;
+}
+
+p,
+article,
+section {
+  line-height: 1.5;
 }

@@ -149,6 +149,7 @@ export default async function Page({ params }: { params: { pair: string } }) {
           coinsHistoricPriceResponse={coinHistoryChartData}
           coin1Id={coin1.id}
           coind2Symbol={coin2.symbol}
+          coin1Symbol={coin1.symbol}
         ></CoinsAreaChart>
       </div>
     </main>

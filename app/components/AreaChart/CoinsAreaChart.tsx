@@ -17,6 +17,7 @@ import { RadioGroup, Radio } from "@nextui-org/react";
 export default function CoinsAreaChart(props: {
   coinsHistoricPriceResponse: ICoinHistoricPriceChartData[];
   coin1Id: string;
+  coin1Symbol: string;
   coind2Symbol: string;
 }) {
   const [selected, setSelected] = React.useState("7");
@@ -44,7 +45,7 @@ export default function CoinsAreaChart(props: {
       <div className={styles.chartContainer}>
         <div className={styles.chartContainer__header}>
           <h2 className={styles.chartContainer__header__title}>
-            BTC to USD daily chart
+            {`${props.coin1Symbol.toUpperCase()} to ${props.coind2Symbol.toUpperCase()} daily chart`}
           </h2>
           <RadioGroup
             className={styles.chartContainer__header__radio}

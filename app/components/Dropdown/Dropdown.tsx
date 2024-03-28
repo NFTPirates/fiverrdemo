@@ -65,7 +65,6 @@ export default function NextUiDropdown(props: INextUiDropdownProps) {
   }, []);
 
   useEffect(() => {
-    console.log(currentQuery, "queryy");
     const queryApi = async () => {
       const result = await fetch(`api/convert/search?query=${currentQuery}`);
 

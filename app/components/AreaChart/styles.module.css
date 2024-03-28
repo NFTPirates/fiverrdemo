@@ -1,0 +1,27 @@
+.chartContainer {
+  padding: 20px;
+  width: 80%;
+}
+
+.chartContainer__chart {
+  height: 400px;
+  width: 100%;
+}
+
+.chartContainer__radio {
+  display: flex;
+  flex-direction: row;
+  background-color: red;
+}
+
+.chartContainer__header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 60px;
+}
+
+.chartContainer__header__title {
+  font-size: larger;
+  font-weight: 700;
+}

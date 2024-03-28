@@ -10,6 +10,19 @@ interface IGetAllCoinsResponse {
   name: string;
 }
 
+export interface IGetCoinHistoricPriceResponse {
+  prices: [string[]];
+  market_caps: [[]];
+  total_volumes: [[]];
+}
+
+export interface ICoinHistoricPriceChartData {
+  date: string;
+  price: number;
+}
+
+import CoinsAreaChart from "../components/AreaChart/CoinsAreaChart";
+
 async function getTrendingCoins() {
   const trendingURL = "https://pro-api.coingecko.com/api/v3/search/trending";
 
@@ -44,20 +57,62 @@ async function getAllCoins(): Promise<IGetAllCoinsResponse[]> {
   return res.json();
 }
 
+async function getCoinHistoricPrice(
+  days = "7"
+): Promise<IGetCoinHistoricPriceResponse> {
+  const url = `https://pro-api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=${days}&interval=daily`;
+
+  const res = await fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+      "x-cg-pro-api-key": process.env.CG_API_KEY!,
+    },
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+
+  return res.json();
+}
+
 export default async function Page({ params }: { params: { pair: string } }) {
   const coinsPairArray = params.pair.split("-");
-  const data = await getTrendingCoins();
-  const allCoins = await getAllCoins();
 
-  const coin1 = allCoins?.find((coin) => coin.symbol === coinsPairArray[0]);
+  const [
+    trendingCoinsResponse,
+    allCoinsListResponse,
+    coinsHistoricPriceResponse,
+  ] = await Promise.all([
+    getTrendingCoins(),
+    getAllCoins(),
+    getCoinHistoricPrice("30"),
+  ]);
 
-  const coin2 = allCoins?.find((coin) => coin.symbol === coinsPairArray[1]);
+  const coinHistoryChartData: ICoinHistoricPriceChartData[] = new Array();
+
+  if (coinsHistoricPriceResponse) {
+    coinsHistoricPriceResponse.prices.map((priceData) => {
+      coinHistoryChartData.push({
+        date: new Date(priceData[0]).toLocaleDateString(),
+        price: Number(priceData[1]),
+      });
+    });
+  }
+
+  const coin1 = allCoinsListResponse?.find(
+    (coin) => coin.symbol === coinsPairArray[0]
+  );
+
+  const coin2 = allCoinsListResponse?.find(
+    (coin) => coin.symbol === coinsPairArray[1]
+  );
 
   if (!coin1 || !coin2) {
     throw new Error("something went wrong");
   }
 
-  const coins = data.coins.map(
+  const coins = trendingCoinsResponse.coins.map(
     (trendingCoin: { item: getTrendingCoinsResponse }) => {
       const coin: Coin = {
         id: trendingCoin.item.id,
@@ -72,10 +127,8 @@ export default async function Page({ params }: { params: { pair: string } }) {
     <main>
       <div className={styles.container}>
         <div className={styles.container__header}>
-          <Image src={"./wave.svg"} quality={100} fill alt={""}></Image>
-
           <h1 className={styles.container__header__title}>
-            Global Crypto Converter
+            {`Convert ${coin1.symbol} to ${coin2.symbol}`}
           </h1>
           <h2 className={styles.container__header_subTitle}>
             Convert your fiat coins to crypto and vice verse
@@ -86,6 +139,9 @@ export default async function Page({ params }: { params: { pair: string } }) {
           startingCoin1Symbol={coin1.id}
           startingCoin2Symbol={coin2.id}
         ></Conversion>
+        <CoinsAreaChart
+          coinsHistoricPriceResponse={coinHistoryChartData}
+        ></CoinsAreaChart>
       </div>
     </main>
   );

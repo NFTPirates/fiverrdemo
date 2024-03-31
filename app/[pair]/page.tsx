@@ -25,8 +25,18 @@ import getFiat from "../services/fiat.service";
 export default async function Page({ params }: { params: { pair: string } }) {
   const coinsPairArray = params.pair.split("-");
 
-  const coin1Id = coinsPairArray[0];
-  const coin2Id = coinsPairArray[1];
+  let coin1Id = "";
+  let coin2Id = "";
+  let coin1Amount = "";
+  console.log(coinsPairArray, "test");
+  if (coinsPairArray.length > 2) {
+    coin1Amount = coinsPairArray[0];
+    coin1Id = coinsPairArray[1];
+    coin2Id = coinsPairArray[3];
+  } else {
+    coin1Id = coinsPairArray[0];
+    coin2Id = coinsPairArray[1];
+  }
 
   const coinsHistoricPriceResponse = await getCoinHistoricChart({
     coin1Id: coin1Id,
@@ -54,6 +64,7 @@ export default async function Page({ params }: { params: { pair: string } }) {
         <Conversion
           defaultCoin1Info={coin1Data ?? coin1Fiat}
           defaultCoin2Info={coin2Data ?? coin2Fiat}
+          initialCoin1Amount={Number(coin1Amount)}
         ></Conversion>
         <CoinsAreaChart
           coinsHistoricPriceResponse={coinsHistoricPriceResponse}

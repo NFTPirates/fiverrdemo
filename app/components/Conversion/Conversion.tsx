@@ -12,10 +12,13 @@ import styles from "./styles.module.css";
 interface IConversion {
   defaultCoin1Info: Coin | Currency | undefined;
   defaultCoin2Info: Coin | Currency | undefined;
+  initialCoin1Amount?: number;
 }
 
 export default function Conversion(props: IConversion) {
-  const [coin1Amount, setCoin1Amount] = useState<number>(1);
+  const [coin1Amount, setCoin1Amount] = useState<number>(
+    props.initialCoin1Amount ?? 1
+  );
   const [coin2Amount, setCoin2Amount] = useState<number>(0);
 
   const [coin1Info, setCoin1Info] = useState<Coin | Currency | undefined>(
@@ -54,6 +57,11 @@ export default function Conversion(props: IConversion) {
     setCoin2Info(coin1);
   };
 
+  const conversionUrl =
+    coin1Amount > 1
+      ? `${coin1Amount}-${coin1Info?.id}-to-${coin2Info?.id}`
+      : `${coin1Info?.id}-${coin2Info?.id}`;
+
   return (
     <div className={styles.container}>
       <div className={styles.container__conversionBoxes}>
@@ -87,7 +95,7 @@ export default function Conversion(props: IConversion) {
         </div>
 
         <Button
-          href={`${coin1Info?.id}-${coin2Info?.id}`}
+          href={conversionUrl}
           as={Link}
           variant="solid"
           className={styles.container__content__button}

@@ -131,16 +131,19 @@ async function getTop3SearchedCoins(props: {
     (a, b) => Number(a.market_cap_rank) - Number(b.market_cap_rank)
   );
 
-  const resultTopSearchedCoins: Coin[] = coinsFilteredByMarketCap.map(
-    (coin) => {
-      return {
-        id: coin.id,
-        image: coin.thumb,
-        name: coin.name,
-        symbol: coin.symbol,
-      };
-    }
+  const realMarketCapCoins = coinsFilteredByMarketCap.filter(
+    (coin) => coin.market_cap_rank !== null
   );
-  const top3SearchedCoins = resultTopSearchedCoins.slice(0, 3);
-  return top3SearchedCoins;
+
+  const top5SearchedCoins = realMarketCapCoins.slice(0, 5);
+
+  const resultTopSearchedCoins: Coin[] = top5SearchedCoins.map((coin) => {
+    return {
+      id: coin.id,
+      image: coin.thumb,
+      name: coin.name,
+      symbol: coin.symbol,
+    };
+  });
+  return resultTopSearchedCoins;
 }

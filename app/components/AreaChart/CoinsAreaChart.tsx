@@ -8,7 +8,6 @@ import {
   Area,
   XAxis,
   YAxis,
-  CartesianGrid,
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
@@ -17,35 +16,37 @@ import { RadioGroup, Radio } from "@nextui-org/react";
 export default function CoinsAreaChart(props: {
   coinsHistoricPriceResponse: ICoinHistoricPriceChartData[];
   coin1Id: string;
-  coin1Symbol: string;
-  coind2Symbol: string;
+  coin2Id: string;
 }) {
-  const [selected, setSelected] = React.useState("7");
+  const [selected, setSelected] = React.useState<string>("7");
   const [updatedChartData, setUpdatedChartData] = React.useState();
 
   useEffect(() => {
     const getChartData = async () => {
       const result = await fetch(
-        `/api/coin/${props.coin1Id}/marketChart?days=${selected}&currency=${props.coind2Symbol}`
+        `/api/coin/${props.coin1Id}/marketChart?days=${selected}&currency=${props.coin2Id}`
       );
 
       if (!result.ok) {
-        console.log("failed to fetch");
         return;
       }
 
       setUpdatedChartData(await result.json());
     };
 
-    getChartData();
+    try {
+      getChartData();
+    } catch (err) {
+      console.log(err, "error");
+    }
   }, [selected]);
 
-  if (props.coinsHistoricPriceResponse.length && updatedChartData) {
+  if (props.coinsHistoricPriceResponse?.length) {
     return (
       <div className={styles.chartContainer}>
         <div className={styles.chartContainer__header}>
           <h2 className={styles.chartContainer__header__title}>
-            {`${props.coin1Symbol.toUpperCase()} to ${props.coind2Symbol.toUpperCase()} daily chart`}
+            {`${props.coin1Id.toUpperCase()} to ${props.coin2Id.toUpperCase()} daily chart`}
           </h2>
           <RadioGroup
             className={styles.chartContainer__header__radio}
@@ -85,5 +86,7 @@ export default function CoinsAreaChart(props: {
         </div>
       </div>
     );
+  } else {
+    return <></>;
   }
 }

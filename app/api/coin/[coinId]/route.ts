@@ -1,22 +1,20 @@
-import { GetCoinResponse } from "@/app/types/coingecko/getCoinResponse";
+import { getCoin } from "@/app/services/coin.service";
+import { Coin } from "@/app/types/coin";
+import { NextResponse } from "next/server";
 
 export async function GET(
   request: Request,
-  { params }: { params: { coinId: string } }
-) {
-  const coinId = params.coinId;
-  const optionalQueryParams =
-    "localization=false&tickers=false&community_data=false&developer_data=false&sparkline=false";
+  {
+    params,
+  }: {
+    params: { coinId: string };
+  }
+): Promise<NextResponse<Coin | undefined>> {
+  if (!params.coinId) {
+    throw new Error("Coin id required");
+  }
 
-  const url = `https://pro-api.coingecko.com/api/v3/coins/${coinId}`;
-  const res = await fetch(`${url}?${optionalQueryParams}`, {
-    headers: {
-      "Content-Type": "application/json",
-      "x-cg-pro-api-key": process.env.CG_API_KEY!,
-    },
-  });
+  const result = await getCoin({ coinId: params.coinId });
 
-  const queryResponse = await res.json();
-
-  return Response.json({ queryResponse });
+  return NextResponse.json(result);
 }

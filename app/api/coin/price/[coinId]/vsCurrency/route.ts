@@ -5,7 +5,10 @@ export async function GET(
   { params }: { params: { coinId: string } }
 ) {
   const coinId = params.coinId;
-  const url = `https://pro-api.coingecko.com/api/v3/simple/price?ids=${coinId}`;
+  const searchParams = request.nextUrl.searchParams;
+  const vsCurrency = searchParams.get("vsCurrency");
+
+  const url = `https://pro-api.coingecko.com/api/v3/simple/price?ids=${coinId}&vs_currencies=${vsCurrency}`;
   const res = await fetch(url, {
     headers: {
       "Content-Type": "application/json",
@@ -13,6 +16,10 @@ export async function GET(
     },
   });
   const data = await res.json();
+
+  if (!data) {
+    return undefined;
+  }
 
   return NextResponse.json({ data });
 }

@@ -1,7 +1,9 @@
-import { Coin } from "../coin";
-
 export interface CoinSearchResponse {
-  queryResponse: {
-    coins: Coin[];
-  };
+  id: string;
+  name: string;
+  api_symbol: string;
+  symbol: string;
+  market_cap_rank: string;
+  thumb: string;
+  large: string;
 }

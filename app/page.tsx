@@ -1,40 +1,11 @@
-import { Coin } from "./types/coin";
-import { getTrendingCoinsResponse } from "./types/coingecko/trendingCoinsResponse";
 import styles from "./styles.module.css";
 import Conversion from "./components/Conversion/Conversion";
-import Image from "next/image";
-
-async function getTrendingCoins() {
-  const trendingURL = "https://pro-api.coingecko.com/api/v3/search/trending";
-
-  const res = await fetch(trendingURL, {
-    headers: {
-      "Content-Type": "application/json",
-      "x-cg-pro-api-key": process.env.CG_API_KEY!,
-    },
-  });
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-
-  return res.json();
-}
+import { getCoin } from "./services/coin.service";
+import getFiat from "./services/fiat.service";
 
 export default async function Home() {
-  const data = await getTrendingCoins();
-
-  const coins = data.coins.map(
-    (trendingCoin: { item: getTrendingCoinsResponse }) => {
-      const coin: Coin = {
-        id: trendingCoin.item.id,
-        name: trendingCoin.item.name,
-        symbol: trendingCoin.item.symbol,
-        thumb: trendingCoin.item.thumb,
-      };
-      return coin;
-    }
-  );
+  const defaultCoinInfo = await getCoin({ coinId: "bitcoin" });
+  const initialFiatcur = getFiat({ fiatId: "usd" });
 
   return (
     <main>
@@ -45,7 +16,10 @@ export default async function Home() {
             Convert your fiat coins to crypto and vice verse
           </h2>
         </div>
-        <Conversion trendingCoins={coins.slice(1, 10)}></Conversion>
+        <Conversion
+          defaultCoin1Info={defaultCoinInfo}
+          defaultCoin2Info={initialFiatcur}
+        ></Conversion>
       </div>
     </main>
   );

@@ -1,4 +1,5 @@
 export interface GetCoinResponse {
+  id: string;
   symbol: string;
   name: string;
   market_data: {

@@ -1,4 +1,4 @@
-import { IGetCoinHistoricPriceResponse } from "@/app/[pair]/page";
+import { getCoinHistoricChart } from "@/app/services/coin.service";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
@@ -8,31 +8,17 @@ export async function GET(
   const searchParams = request.nextUrl.searchParams;
   const days = searchParams.get("days");
   const currency = searchParams.get("currency");
-
   const coinId = params.coinId;
 
-  const url = `https://pro-api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=${currency}&days=${days}&interval=daily`;
+  if (!days || !coinId || !currency) {
+    return new NextResponse();
+  }
 
-  const res = await fetch(url, {
-    headers: {
-      "Content-Type": "application/json",
-      "x-cg-pro-api-key": process.env.CG_API_KEY!,
-    },
+  const result = await getCoinHistoricChart({
+    coin1Id: coinId.toLowerCase(),
+    coin2Id: currency.toLowerCase(),
+    days: days,
   });
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-
-  const data = (await res.json()) as IGetCoinHistoricPriceResponse;
-  const chartDataArray: any[] = [];
-  if (data) {
-    data.prices.map((priceData) => {
-      chartDataArray.push({
-        date: new Date(priceData[0]).toLocaleDateString(),
-        price: Number(priceData[1]),
-      });
-    });
-  }
-  return NextResponse.json(chartDataArray);
+  return NextResponse.json(result);
 }

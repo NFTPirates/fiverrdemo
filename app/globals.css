@@ -8,6 +8,8 @@
   --background1: #f2cc8f;
   --red: #e07a5f;
   --green: #81b29a;
+
+  --title-h1-size: 34px;
 }
 
 input::-webkit-outer-spin-button,
@@ -22,7 +24,7 @@ body {
 
 h1 {
   color: var(--foreground);
-  font-size: xx-large;
+  font-size: var(--title-h1-size);
   font-weight: bold;
 }
 

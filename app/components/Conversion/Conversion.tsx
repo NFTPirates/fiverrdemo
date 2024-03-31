@@ -1,6 +1,7 @@
 "use client";
+import { getConversion } from "@/app/services/conversion.service";
 import { Coin } from "@/app/types/coin";
-import { GetCoinResponse } from "@/app/types/coingecko/getCoinResponse";
+import { Currency } from "@/app/types/currency";
 import { Button } from "@nextui-org/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -8,52 +9,60 @@ import ConversionBox from "../ConversionBox/ConversionBox";
 import { SwitchIcon } from "../SwitchIcon";
 import styles from "./styles.module.css";
 
-interface IConversionBoxProps {
-  trendingCoins: Coin[];
-  coinsSymbols?: string[];
-  startingCoin1Symbol?: string;
-  startingCoin2Symbol?: string;
+interface IConversion {
+  defaultCoin1Info: Coin | Currency | undefined;
+  defaultCoin2Info: Coin | Currency | undefined;
 }
 
-export interface IConversionCoin {
-  coinData?: GetCoinResponse;
-  amount?: number;
-}
+export default function Conversion(props: IConversion) {
+  const [coin1Amount, setCoin1Amount] = useState<number>(1);
+  const [coin2Amount, setCoin2Amount] = useState<number>(0);
 
-export default function Conversion(props: IConversionBoxProps) {
-  const [coin1Data, setCoin1Data] = useState<GetCoinResponse>();
-  const [coin2Data, setCoin2Data] = useState<GetCoinResponse>();
-
-  const [coin1Amount, setCoin1Amount] = useState<number | undefined>(1);
-  const [coin2Amount, setCoin2Amount] = useState<number>();
+  const [coin1Info, setCoin1Info] = useState<Coin | Currency | undefined>(
+    props.defaultCoin1Info
+  );
+  const [coin2Info, setCoin2Info] = useState<Coin | Currency | undefined>(
+    props.defaultCoin2Info
+  );
 
   useEffect(() => {
-    const coin1Price = coin1Data?.market_data.current_price.usd;
-    const coin2Price = coin2Data?.market_data.current_price.usd;
+    async function getTotalConversion() {
+      const coin1Price = coin1Info?.market_data?.current_price?.usd;
+      const coin2Price = coin2Info?.market_data?.current_price?.usd;
 
-    if (coin1Price && coin2Price && coin1Amount) {
-      const conv = (coin1Price * coin1Amount) / coin2Price;
-      setCoin2Amount(conv);
+      const conversion = await getConversion({
+        coin1Amount: coin1Amount,
+        coin1Id: coin1Info?.id,
+        coin2Id: coin2Info?.id,
+        coin1CurPrice: coin1Price,
+        coin2CurPrice: coin2Price,
+      });
+
+      if (!conversion) {
+        throw new Error("error conversion");
+      }
+
+      setCoin2Amount(conversion);
     }
-  }, [coin1Data, coin2Data, coin1Amount]);
+
+    getTotalConversion();
+  }, [coin1Info, coin2Info, coin1Amount]);
 
   const handleSwitchButton = () => {
-    const coin1 = coin1Data;
-    setCoin1Data(coin2Data);
-    setCoin2Data(coin1);
+    const coin1 = coin1Info;
+    setCoin1Info(coin2Info);
+    setCoin2Info(coin1);
   };
 
   return (
     <div className={styles.container}>
       <div className={styles.container__conversionBoxes}>
         <ConversionBox
-          trendingCoins={props.trendingCoins}
-          setCoin={setCoin1Data}
-          initialValue={props.startingCoin1Symbol ?? "bitcoin"}
           key={"coin1"}
-          coin={coin1Data}
           coinAmount={coin1Amount}
           setCoinAmount={setCoin1Amount}
+          coinInfo={coin1Info}
+          setCoinInfo={setCoin1Info}
         ></ConversionBox>
         <Button
           className={styles.container__conversionBoxes__button}
@@ -65,23 +74,20 @@ export default function Conversion(props: IConversionBoxProps) {
           <SwitchIcon />
         </Button>
         <ConversionBox
-          trendingCoins={props.trendingCoins}
-          setCoin={setCoin2Data}
-          initialValue={props.startingCoin2Symbol ?? "usd-coin"}
-          key={"coin2"}
-          coin={coin2Data}
           coinAmount={coin2Amount}
           setCoinAmount={setCoin2Amount}
+          coinInfo={coin2Info}
+          setCoinInfo={setCoin2Info}
         ></ConversionBox>
       </div>
 
       <div className={styles.container__content}>
         <div className={styles.container__content__section}>
-          <h2>{`${coin1Amount} ${coin1Data?.symbol} = ${coin2Amount} ${coin2Data?.symbol}`}</h2>
+          <h2>{`${coin1Amount} ${coin1Info?.symbol} = ${coin2Amount} ${coin2Info?.name}`}</h2>
         </div>
 
         <Button
-          href={`${coin1Data?.symbol}-${coin2Data?.symbol}`}
+          href={`${coin1Info?.id}-${coin2Info?.id}`}
           as={Link}
           variant="solid"
           className={styles.container__content__button}

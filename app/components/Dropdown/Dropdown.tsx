@@ -133,6 +133,7 @@ export default function NextUiDropdown(props: INextUiDropdownProps) {
             size="sm"
             startContent={<SearchIcon size={18} width={20} height={20} />}
             type="search"
+            onClear={() => setCurrentQuery("")}
           />
         </DropdownItem>
         {createDropdownItems()}

@@ -28,7 +28,6 @@ export default async function Page({ params }: { params: { pair: string } }) {
   let coin1Id = "";
   let coin2Id = "";
   let coin1Amount = "";
-  console.log(coinsPairArray, "test");
   if (coinsPairArray.length > 2) {
     coin1Amount = coinsPairArray[0];
     coin1Id = coinsPairArray[1];

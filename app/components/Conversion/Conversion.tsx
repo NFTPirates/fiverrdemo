@@ -42,7 +42,7 @@ export default function Conversion(props: IConversion) {
       });
 
       if (!conversion) {
-        throw new Error("error conversion");
+        return;
       }
 
       setCoin2Amount(conversion);

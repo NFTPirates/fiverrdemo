@@ -13,33 +13,42 @@ export async function getCoinPriceAgainstCurrency(
   const lowerCaseCoin1Id = props.coin1Id.toLowerCase();
   const lowerCaseCoin2Id = props.coin2Id.toLowerCase();
 
-  const result = await fetch(
-    `api/coin/price/${lowerCaseCoin1Id}/vsCurrency?vsCurrency=${lowerCaseCoin2Id}`
-  );
+  const url1 = `https://pro-api.coingecko.com/api/v3/simple/price?ids=${lowerCaseCoin1Id}&vs_currencies=${lowerCaseCoin2Id}`;
+  const url2 = `https://pro-api.coingecko.com/api/v3/simple/price?ids=${lowerCaseCoin2Id}&vs_currencies=${lowerCaseCoin1Id}`;
 
-  // if coins are switched for fiat
-  const result1 = await fetch(
-    `api/coin/price/${lowerCaseCoin2Id}/vsCurrency?vsCurrency=${lowerCaseCoin1Id}`
-  );
+  const res1 = await fetch(url1, {
+    headers: {
+      "Content-Type": "application/json",
+      "x-cg-pro-api-key": process.env.CG_API_KEY!,
+    },
+  });
 
-  if (result.ok) {
-    const res = await result.json();
+  const res2 = await fetch(url2, {
+    headers: {
+      "Content-Type": "application/json",
+      "x-cg-pro-api-key": process.env.CG_API_KEY!,
+    },
+  });
+
+  if (res1.ok) {
+    const result = await res1.json();
+
     if (
-      res?.data[lowerCaseCoin1Id] &&
-      res?.data[lowerCaseCoin1Id][lowerCaseCoin2Id]
+      result[lowerCaseCoin1Id] &&
+      result[lowerCaseCoin1Id][lowerCaseCoin2Id]
     ) {
       return {
-        conversion: res.data[lowerCaseCoin1Id][lowerCaseCoin2Id],
+        conversion: result[lowerCaseCoin1Id][lowerCaseCoin2Id],
         switched: false,
       };
     }
   }
 
-  if (result1.ok) {
-    const res = await result1.json();
+  if (res2.ok) {
+    const result = await res2.json();
 
     return {
-      conversion: res.data[lowerCaseCoin2Id][lowerCaseCoin1Id],
+      conversion: result[lowerCaseCoin2Id][lowerCaseCoin1Id],
       switched: true,
     };
   }

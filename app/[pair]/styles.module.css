@@ -15,3 +15,16 @@
 .container__header__title {
   margin-bottom: 20px;
 }
+
+.container__priceTable {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 80%;
+}
+
+@media (min-width: 1024px) {
+  .container__priceTable {
+    flex-direction: row;
+  }
+}

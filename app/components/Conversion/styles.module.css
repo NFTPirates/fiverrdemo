@@ -1,64 +1,64 @@
 .container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 80%;
-  padding: 30px 50px;
-  background-color: var(--background1);
-  border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    padding: 30px 50px;
+    background-color: var(--background1);
+    border-radius: 15px;
 }
 
 .container__conversionBoxes {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  justify-content: space-between;
-  margin-bottom: 50px;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 50px;
+    align-items: center;
 }
 
 .container__content {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
 
 .container__content__button {
-  background-color: var(--red);
-  width: 100%;
-  margin: 20px 0;
+    background-color: var(--red);
+    width: 100%;
+    margin: 20px 0;
 }
 
 .container__content__section {
-  display: flex;
-  flex-direction: row;
+    display: flex;
+    flex-direction: row;
 }
 
 .container__conversionBoxes__button {
-  height: 80px;
-  width: 80px;
-  margin: 20px 0;
-  background-color: var(--red);
+    height: 80px;
+    width: 80px;
+    margin: 20px 0;
+    background-color: var(--red);
 }
 
 @media (min-width: 1024px) {
-  .container__conversionBoxes {
-    display: flex;
-    flex-direction: row;
-  }
+    .container__conversionBoxes {
+        display: flex;
+        flex-direction: row;
+    }
 
-  .container__conversionBoxes__button {
-    margin: 0 20px;
-  }
+    .container__conversionBoxes__button {
+        margin: 0 20px;
+    }
 
-  .container__content {
-    flex-direction: row;
-  }
+    .container__content {
+        flex-direction: row;
+    }
 
-  .container__content__button {
-    width: 20%;
-  }
+    .container__content__button {
+        width: 20%;
+    }
 }

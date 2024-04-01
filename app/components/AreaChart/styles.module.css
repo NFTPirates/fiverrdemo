@@ -1,29 +1,29 @@
 .chartContainer {
-  padding: 20px;
-  width: 85%;
-  margin-top: 50px;
+    padding: 20px;
+    width: 85%;
+    margin-top: 50px;
 }
 
 .chartContainer__chart {
-  height: 400px;
-  width: 100%;
+    height: 400px;
+    width: 100%;
 }
 
 .chartContainer__header__radio {
-  display: flex;
-  flex-direction: row;
-  background-color: var(--background1);
-  border-radius: 15px;
-  padding: 10px;
+    display: flex;
+    flex-direction: row;
+    background-color: var(--background1);
+    border-radius: 15px;
+    padding: 10px;
 }
 
 .chartContainer__header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-bottom: 60px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 60px;
 }
 
 .chartContainer__header__title {
-  font-weight: 700;
+    font-weight: 700;
 }

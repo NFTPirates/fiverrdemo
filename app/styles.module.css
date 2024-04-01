@@ -1,18 +1,18 @@
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100vh;
-  padding: 50px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    padding: 50px 20px;
 }
 
 .container__header {
-  margin: 50px 0 50px;
-  text-align: center;
-  width: 100%;
-  position: relative;
+    margin: 50px 0 50px;
+    text-align: center;
+    width: 100%;
+    position: relative;
 }
 
 .container__header__title {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }

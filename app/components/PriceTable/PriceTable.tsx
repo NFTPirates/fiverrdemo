@@ -21,7 +21,6 @@ interface IPriceTableProps {
 }
 
 export default function PriceTable(props: IPriceTableProps) {
-  console.log(props.priceTableData, "tabledata");
   const columns = [
     {
       name: props.defaultCoin1Info?.symbol.toUpperCase(),

@@ -9,6 +9,7 @@ import {
   XAxis,
   YAxis,
   Tooltip,
+  Label,
   ResponsiveContainer,
 } from "recharts";
 import { RadioGroup, Radio } from "@nextui-org/react";
@@ -72,8 +73,17 @@ export default function CoinsAreaChart(props: {
                 bottom: 0,
               }}
             >
-              <XAxis dataKey="date" />
-              <YAxis />
+              <XAxis dataKey="date">
+                <Label value="Date" offset={0} position="insideBottom" />
+              </XAxis>
+              <YAxis>
+                <Label
+                  value="Price"
+                  offset={10}
+                  position="insideLeft"
+                  angle={-90}
+                />
+              </YAxis>
               <Tooltip />
               <Area
                 type="monotone"

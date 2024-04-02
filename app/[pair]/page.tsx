@@ -80,7 +80,7 @@ export default async function Page({ params }: { params: { pair: string } }) {
     const coinsPairArray = params.pair.split('-');
     let coin1Id = '';
     let coin2Id = '';
-    let coin1Amount = '';
+    let coin1Amount = '1';
     if (coinsPairArray.length > 2) {
         coin1Amount = coinsPairArray[0];
         coin1Id = coinsPairArray[1];

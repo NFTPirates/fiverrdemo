@@ -125,7 +125,7 @@ async function getTop3SearchedCoins(props: {
     currentQuery: string;
 }): Promise<Coin[]> {
     const result = await fetch(
-        `api/convert/search?query=${props.currentQuery}`
+        `api/convert/search?query=${props.currentQuery}`,
     );
 
     if (!result.ok) {

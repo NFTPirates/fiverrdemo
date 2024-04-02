@@ -15,10 +15,11 @@ export async function getConversion(
         return undefined;
     }
 
-    const convResult = await getCoinPriceAgainstCurrency({
-        coin1Id: props.coin1Id,
-        coin2Id: props.coin2Id,
-    });
+    const result = await fetch(
+        `api/coin/price/${props.coin1Id}/vsCurrency?vsCurrency=${props.coin2Id}`
+    );
+
+    const convResult = (await result.json()) as any;
 
     if (convResult?.switched && convResult.conversion) {
         const finalConversionAmount =

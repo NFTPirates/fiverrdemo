@@ -2,6 +2,7 @@
 import { getConversion } from '@/app/services/conversion.service';
 import { Coin } from '@/app/types/coin';
 import { Currency } from '@/app/types/currency';
+import { formatNumberToString } from '@/app/utils/utils';
 import { Button } from '@nextui-org/react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -91,7 +92,7 @@ export default function Conversion(props: IConversion) {
 
             <div className={styles.container__content}>
                 <div className={styles.container__content__section}>
-                    <h2>{`${coin1Amount} ${coin1Info?.symbol} = ${coin2Amount} ${coin2Info?.name}`}</h2>
+                    <h2>{`${formatNumberToString({ numberToFormat: coin1Amount })} ${coin1Info?.symbol} = ${formatNumberToString({ numberToFormat: coin2Amount })} ${coin2Info?.name}`}</h2>
                 </div>
 
                 <Button

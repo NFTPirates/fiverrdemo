@@ -13,6 +13,7 @@ import { Coin } from '@/app/types/coin';
 import { Currency } from '@/app/types/currency';
 import Link from 'next/link';
 import styles from './styles.module.css';
+import { formatNumberToString } from '@/app/utils/utils';
 
 interface IPriceTableProps {
     priceTableData?: { coin1: number; coin2: number }[];
@@ -43,16 +44,20 @@ export default function PriceTable(props: IPriceTableProps) {
                             className="flex flex-col"
                             href={`${item.coin1}-${props.defaultCoin1Info?.id}-to-${props.defaultCoin2Info?.id}`}
                         >
-                            {item.coin1}
+                            {formatNumberToString({
+                                numberToFormat: item.coin1,
+                            })}
                         </Link>
                     );
                 case 'coin2':
                     return (
                         <Link
                             className="flex flex-col"
-                            href={`${item.coin2}-${props.defaultCoin2Info?.id}-to-${props.defaultCoin1Info?.id}`}
+                            href={`${item.coin1}-${props.defaultCoin1Info?.id}-to-${props.defaultCoin2Info?.id}`}
                         >
-                            {item.coin2}
+                            {formatNumberToString({
+                                numberToFormat: item.coin2,
+                            })}
                         </Link>
                     );
                 default:

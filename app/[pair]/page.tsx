@@ -17,6 +17,7 @@ import { getCoin, getCoinHistoricChart } from '../services/coin.service';
 import getFiat from '../services/fiat.service';
 import PriceTable from '../components/PriceTable/PriceTable';
 import { getCoinPriceAgainstCurrency } from '../services/price.service';
+import { Metadata, ResolvingMetadata } from 'next';
 
 const PriceThresholdsArray = [1, 5, 10, 25, 50, 100, 500, 1000, 5000];
 
@@ -74,6 +75,36 @@ async function getPriceTableDataForCoins(props: {
     }
 
     return {};
+}
+export const metadata: Metadata = {
+    title: '...',
+    description: '...',
+};
+
+type Props = {
+    params: { id: string };
+    searchParams: { [key: string]: string | string[] | undefined };
+};
+
+export async function generateMetadata(
+    { params, searchParams }: Props,
+    parent: ResolvingMetadata
+): Promise<Metadata> {
+    // read route params
+    const id = params.id;
+
+    // fetch data
+    const product = await fetch(`https://.../${id}`).then((res) => res.json());
+
+    // optionally access and extend (rather than replace) parent metadata
+    const previousImages = (await parent).openGraph?.images || [];
+
+    return {
+        title: product.title,
+        openGraph: {
+            images: ['/some-specific-page-image.jpg', ...previousImages],
+        },
+    };
 }
 
 export default async function Page({ params }: { params: { pair: string } }) {

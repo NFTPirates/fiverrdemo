@@ -10,7 +10,8 @@
         "build": "next build",
         "start": "next start",
         "lint": "next lint",
-        "prettier": "prettier --write ."
+        "prettier": "prettier --write .",
+        "startAzure": "./node_modules/next/dist/.bin/next start"
     },
     "dependencies": {
         "@nextui-org/react": "^2.2.10",

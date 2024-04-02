@@ -2,15 +2,9 @@ import styles from './styles.module.css';
 import Conversion from './components/Conversion/Conversion';
 import { getCoin } from './services/coin.service';
 import getFiat from './services/fiat.service';
-import { Metadata, ResolvingMetadata } from 'next';
-type Props = {
-    params: { pair: string };
-    searchParams: { [key: string]: string | string[] | undefined };
-};
-export async function generateMetadata(
-    { params }: Props,
-    parent: ResolvingMetadata
-): Promise<Metadata> {
+import { Metadata } from 'next';
+
+export async function generateMetadata(): Promise<Metadata> {
     const defaultCoinInfo = await getCoin({ coinId: 'bitcoin' });
     const initialFiatcur = getFiat({ fiatId: 'usd' });
 

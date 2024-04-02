@@ -1,5 +1,3 @@
-import { getCoinPriceAgainstCurrency } from './price.service';
-
 interface IGetCoinPriceAgainstCurrency {
     coin1Id?: string;
     coin2Id?: string;

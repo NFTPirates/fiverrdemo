@@ -131,6 +131,8 @@ export default async function Page({ params }: { params: { pair: string } }) {
         days: '7',
     });
 
+    console.log(params, 'params');
+
     const coin1Data = await getCoin({ coinId: coin1Id });
     const coin2Data = await getCoin({ coinId: coin2Id });
 
@@ -138,7 +140,7 @@ export default async function Page({ params }: { params: { pair: string } }) {
     const coin2Fiat = getFiat({ fiatId: coin2Id });
 
     let priceTableData;
-    if (coin1Data && coin2Fiat) {
+    if ((coin1Data && coin2Fiat) || (coin1Fiat && coin2Data)) {
         priceTableData = await getPriceTableDataForFiat({
             coin1Id: coin1Id,
             coin2Id: coin2Id,

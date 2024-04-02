@@ -1,5 +1,11 @@
 import styles from './styles.module.css';
 import Conversion from '../components/Conversion/Conversion';
+import CoinsAreaChart from '../components/AreaChart/CoinsAreaChart';
+import { getCoin, getCoinHistoricChart } from '../services/coin.service';
+import getFiat from '../services/fiat.service';
+import PriceTable from '../components/PriceTable/PriceTable';
+import { getCoinPriceAgainstCurrency } from '../services/price.service';
+import { Metadata, ResolvingMetadata } from 'next';
 
 export interface IGetCoinHistoricPriceResponse {
     prices: [string[]];
@@ -11,14 +17,6 @@ export interface ICoinHistoricPriceChartData {
     date: string;
     price: number;
 }
-
-import CoinsAreaChart from '../components/AreaChart/CoinsAreaChart';
-import { getCoin, getCoinHistoricChart } from '../services/coin.service';
-import getFiat from '../services/fiat.service';
-import PriceTable from '../components/PriceTable/PriceTable';
-import { getCoinPriceAgainstCurrency } from '../services/price.service';
-import { Metadata, ResolvingMetadata } from 'next';
-
 const PriceThresholdsArray = [1, 5, 10, 25, 50, 100, 500, 1000, 5000];
 
 async function getPriceTableDataForFiat(props: {
@@ -76,34 +74,40 @@ async function getPriceTableDataForCoins(props: {
 
     return {};
 }
-export const metadata: Metadata = {
-    title: '...',
-    description: '...',
-};
 
 type Props = {
-    params: { id: string };
+    params: { pair: string };
     searchParams: { [key: string]: string | string[] | undefined };
 };
 
 export async function generateMetadata(
-    { params, searchParams }: Props,
+    { params }: Props,
     parent: ResolvingMetadata
 ): Promise<Metadata> {
-    // read route params
-    const id = params.id;
+    const coinsPairArray = params.pair.split('-');
+    let coin1Id = '';
+    let coin2Id = '';
+    let coin1Amount = '1';
+    if (coinsPairArray.length > 2) {
+        coin1Amount = coinsPairArray[0];
+        coin1Id = coinsPairArray[1];
+        coin2Id = coinsPairArray[3];
+    } else {
+        coin1Id = coinsPairArray[0];
+        coin2Id = coinsPairArray[1];
+    }
 
-    // fetch data
-    const product = await fetch(`https://.../${id}`).then((res) => res.json());
+    const coin1Data = await getCoin({ coinId: coin1Id });
+    const coin2Data = await getCoin({ coinId: coin2Id });
 
-    // optionally access and extend (rather than replace) parent metadata
-    const previousImages = (await parent).openGraph?.images || [];
+    const coin1Fiat = getFiat({ fiatId: coin1Id });
+    const coin2Fiat = getFiat({ fiatId: coin2Id });
 
     return {
-        title: product.title,
-        openGraph: {
-            images: ['/some-specific-page-image.jpg', ...previousImages],
-        },
+        title: `Convert ${coin1Amount} ${coin1Data?.symbol ?? coin1Fiat?.symbol} to ${coin2Data?.symbol ?? coin2Fiat?.symbol} (${coin1Amount} ${coin1Data?.id ?? coin1Fiat?.id} to ${coin2Data?.id ?? coin2Fiat?.id})`,
+        description: `Convert ${coin1Amount} ${coin1Data?.symbol ?? coin1Fiat?.symbol} to ${coin2Data?.symbol ?? coin2Fiat?.symbol} (${coin1Amount} ${coin1Data?.id ?? coin1Fiat?.id} to ${coin2Data?.id ?? coin2Fiat?.id})`,
+        keywords:
+            'Convert 1 BTC to ETH,1 Bitcoin to Ethereum,BTC,ETH,Bitcoin,Ethereum,crypto calculator, crypto converter',
     };
 }
 

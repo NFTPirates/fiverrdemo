@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import Providers from './providers';
-import Navbar from './components/NavBar/NavBar';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import NavigationBar from './components/NavBar/NavBar';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -21,7 +21,7 @@ export default function RootLayout({
         <html lang="en">
             <body className={inter.className}>
                 <Providers>
-                    <Navbar></Navbar>
+                    <NavigationBar></NavigationBar>
                     {children}
                 </Providers>
                 <SpeedInsights />

@@ -10,6 +10,7 @@ import {
     Link,
 } from '@nextui-org/react';
 import { AcmeLogo } from '../AcmeLogo';
+import Image from 'next/image';
 const MenuItems = [
     { name: 'Converter', link: './convert' },
     { name: 'News', link: './news' },
@@ -44,7 +45,12 @@ export default function NavigationBar() {
         <Navbar maxWidth="full" onMenuOpenChange={setIsMenuOpen}>
             <NavbarContent>
                 <NavbarBrand>
-                    <AcmeLogo />
+                    <Image
+                        src={'/logo.png'}
+                        height={50}
+                        width={50}
+                        alt=""
+                    ></Image>
                     <p className="font-bold text-inherit">ACME</p>
                 </NavbarBrand>
             </NavbarContent>

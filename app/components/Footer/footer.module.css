@@ -1,11 +1,28 @@
 .container {
     display: flex;
     justify-content: space-between;
-    padding: 20px 200px;
     background-color: hsl(var(--nextui-background) / 0.7);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 50px;
+    width: 100%;
+}
+
+.container__info {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 40px;
 }
 
 .container__Column {
     display: flex;
     flex-direction: column;
+}
+
+@media (min-width: 1024px) {
+    .container {
+        padding: 40px 200px;
+    }
 }

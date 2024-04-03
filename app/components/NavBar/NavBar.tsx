@@ -41,7 +41,11 @@ export default function NavigationBar() {
     };
 
     return (
-        <Navbar maxWidth="full" onMenuOpenChange={setIsMenuOpen}>
+        <Navbar
+            maxWidth="full"
+            className="lg:px-20"
+            onMenuOpenChange={setIsMenuOpen}
+        >
             <NavbarContent>
                 <NavbarBrand>
                     <Image

@@ -1,6 +1,5 @@
 'use client';
 
-import { ICoinHistoricPriceChartData } from '@/app/[pair]/page';
 import styles from './styles.module.css';
 import React, { useEffect } from 'react';
 import {
@@ -13,6 +12,8 @@ import {
     ResponsiveContainer,
 } from 'recharts';
 import { RadioGroup, Radio } from '@nextui-org/react';
+import { ICoinHistoricPriceChartData } from '@/app/(mainPages)/[pair]/page';
+//TODO move this type
 
 export default function CoinsAreaChart(props: {
     coinsHistoricPriceResponse: ICoinHistoricPriceChartData[];

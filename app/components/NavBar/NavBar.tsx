@@ -7,7 +7,6 @@ import {
     NavbarItem,
     NavbarMenuToggle,
     NavbarMenu,
-    NavbarMenuItem,
     Link,
 } from '@nextui-org/react';
 import { AcmeLogo } from '../AcmeLogo';

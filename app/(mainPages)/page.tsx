@@ -1,7 +1,7 @@
 import styles from './styles.module.css';
-import Conversion from './components/Conversion/Conversion';
-import { getCoin } from './services/coin.service';
-import getFiat from './services/fiat.service';
+import Conversion from '../components/Conversion/Conversion';
+import { getCoin } from '../services/coin.service';
+import getFiat from '../services/fiat.service';
 import { Metadata } from 'next';
 
 export async function generateMetadata(): Promise<Metadata> {

@@ -1,6 +1,6 @@
+import { IGetCoinHistoricPriceResponse } from '../(mainPages)/[pair]/page';
 import { Coin } from '../types/coin';
 import { GetCoinResponse } from '../types/coingecko/getCoinResponse';
-import { IGetCoinHistoricPriceResponse } from '../[pair]/page';
 import getFiat from './fiat.service';
 
 interface IGetCoinProps {

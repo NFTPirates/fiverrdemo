@@ -2,7 +2,7 @@
 import { Coin } from '@/app/types/coin';
 import { Currency } from '@/app/types/currency';
 import { Input } from '@nextui-org/react';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import NextUiDropdown from '../Dropdown/Dropdown';
 import styles from './styles.module.css';
 

@@ -1,11 +1,15 @@
 import styles from './styles.module.css';
-import Conversion from '../components/Conversion/Conversion';
-import CoinsAreaChart from '../components/AreaChart/CoinsAreaChart';
-import { getCoin, getCoinHistoricChart } from '../services/coin.service';
-import getFiat from '../services/fiat.service';
-import PriceTable from '../components/PriceTable/PriceTable';
-import { getCoinPriceAgainstCurrency } from '../services/price.service';
 import { Metadata, ResolvingMetadata } from 'next';
+import CoinsAreaChart from '@/app/components/AreaChart/CoinsAreaChart';
+import Conversion from '@/app/components/Conversion/Conversion';
+import PriceTable from '@/app/components/PriceTable/PriceTable';
+import { getCoin, getCoinHistoricChart } from '@/app/services/coin.service';
+import getFiat from '@/app/services/fiat.service';
+import { getCoinPriceAgainstCurrency } from '@/app/services/price.service';
+import { Faq } from '@/app/components/Faq/Faq';
+import { Coin } from '@/app/types/coin';
+import { Currency } from '@/app/types/currency';
+import { getConversion } from '@/app/services/conversion.service';
 
 export interface IGetCoinHistoricPriceResponse {
     prices: [string[]];
@@ -111,6 +115,23 @@ export async function generateMetadata(
     };
 }
 
+async function getTotalConversion(
+    coin1?: Coin | Currency,
+    coin2?: Coin | Currency
+): Promise<any> {
+    const conversion = await getCoinPriceAgainstCurrency({
+        coin1Id: coin1?.id,
+        coin2Id: coin2?.id,
+    });
+
+    //TODO FIX TYPE
+    if (!conversion) {
+        return 1;
+    }
+
+    return conversion;
+}
+
 export default async function Page({ params }: { params: { pair: string } }) {
     const coinsPairArray = params.pair.split('-');
     let coin1Id = '';
@@ -131,13 +152,19 @@ export default async function Page({ params }: { params: { pair: string } }) {
         days: '7',
     });
 
-    console.log(params, 'params');
-
     const coin1Data = await getCoin({ coinId: coin1Id });
     const coin2Data = await getCoin({ coinId: coin2Id });
 
     const coin1Fiat = getFiat({ fiatId: coin1Id });
     const coin2Fiat = getFiat({ fiatId: coin2Id });
+
+    const coin1 = coin1Data ?? coin1Fiat;
+    const coin2 = coin2Data ?? coin2Fiat;
+
+    const conversion = await getTotalConversion(coin1, coin2);
+
+    //TODO: remove conversio endpoint
+    //TODO: fix faq
 
     let priceTableData;
     if ((coin1Data && coin2Fiat) || (coin1Fiat && coin2Data)) {
@@ -164,8 +191,8 @@ export default async function Page({ params }: { params: { pair: string } }) {
                     </h2>
                 </div>
                 <Conversion
-                    defaultCoin1Info={coin1Data ?? coin1Fiat}
-                    defaultCoin2Info={coin2Data ?? coin2Fiat}
+                    defaultCoin1Info={coin1}
+                    defaultCoin2Info={coin2}
                     initialCoin1Amount={Number(coin1Amount)}
                 ></Conversion>
                 <CoinsAreaChart
@@ -176,15 +203,20 @@ export default async function Page({ params }: { params: { pair: string } }) {
                 <div className={styles.container__priceTable}>
                     <PriceTable
                         priceTableData={priceTableData?.normalArray}
-                        defaultCoin1Info={coin1Data ?? coin1Fiat}
-                        defaultCoin2Info={coin2Data ?? coin2Fiat}
+                        defaultCoin1Info={coin1}
+                        defaultCoin2Info={coin2}
                     ></PriceTable>
                     <PriceTable
                         priceTableData={priceTableData?.switchedArray}
-                        defaultCoin1Info={coin2Data ?? coin2Fiat}
-                        defaultCoin2Info={coin1Data ?? coin1Fiat}
+                        defaultCoin1Info={coin1}
+                        defaultCoin2Info={coin2}
                     ></PriceTable>
                 </div>
+                <Faq
+                    coin1={coin1}
+                    coin2={coin2}
+                    conversion={conversion?.conversion}
+                ></Faq>
             </div>
         </main>
     );

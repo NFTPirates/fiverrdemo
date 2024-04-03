@@ -9,7 +9,6 @@ import {
     NavbarMenu,
     Link,
 } from '@nextui-org/react';
-import { AcmeLogo } from '../AcmeLogo';
 import Image from 'next/image';
 const MenuItems = [
     { name: 'Converter', link: './convert' },

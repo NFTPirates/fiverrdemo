@@ -41,6 +41,12 @@ h2 {
     font-weight: bold;
 }
 
+h3 {
+    color: var(--foreground);
+    font-size: large;
+    font-weight: bold;
+}
+
 p {
     font-weight: normal;
     font-size: medium;

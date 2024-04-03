@@ -1,3 +1,4 @@
+import BlogPost from '@/app/components/BlogPosts/BlogPost';
 import { Metadata } from 'next';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -10,5 +11,9 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function BlogPage() {
-    return <main>Blog page</main>;
+    return (
+        <main>
+            <BlogPost></BlogPost>
+        </main>
+    );
 }

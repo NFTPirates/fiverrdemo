@@ -22,7 +22,7 @@ export default function RootLayout({
             <body className={inter.className}>
                 <Providers>
                     <NavigationBar></NavigationBar>
-                    <div className="px-40 py-20"> {children}</div>
+                    <div className="sm:px-10 lg:px-40 py-20"> {children}</div>
                 </Providers>
                 <SpeedInsights />
             </body>

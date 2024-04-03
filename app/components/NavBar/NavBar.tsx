@@ -12,12 +12,12 @@ import {
 } from '@nextui-org/react';
 import { AcmeLogo } from '../AcmeLogo';
 const MenuItems = [
-    'Converter',
-    'News',
-    'Blog',
-    'Predictions',
-    'Calculator',
-    'Newsletter',
+    { name: 'Converter', link: './convert' },
+    { name: 'News', link: './news' },
+    { name: 'Blog', link: './blog' },
+    { name: 'Predictions', link: './predictions' },
+    { name: 'Calculator', link: './calculator' },
+    { name: 'Newsletter', link: './newsletter' },
 ];
 
 export default function NavigationBar() {
@@ -27,8 +27,12 @@ export default function NavigationBar() {
         const navBarItems = MenuItems.map((item, index) => {
             return (
                 <NavbarItem key={index}>
-                    <Link className="text-lg" color="foreground" href="#">
-                        {item}
+                    <Link
+                        className="text-lg"
+                        color="foreground"
+                        href={item.link}
+                    >
+                        {item.name}
                     </Link>
                 </NavbarItem>
             );

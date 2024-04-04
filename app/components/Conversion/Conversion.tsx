@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import ConversionBox from '../ConversionBox/ConversionBox';
 import { SwitchIcon } from '../SwitchIcon';
-import styles from './styles.module.css';
+import styles from './conversion.module.css';
 
 interface IConversion {
     defaultCoin1Info: Coin | Currency | undefined;
@@ -92,7 +92,7 @@ export default function Conversion(props: IConversion) {
 
             <div className={styles.container__content}>
                 <div className={styles.container__content__section}>
-                    <h2>{`${formatNumberToString({ numberToFormat: coin1Amount })} ${coin1Info?.symbol} = ${formatNumberToString({ numberToFormat: coin2Amount })} ${coin2Info?.name}`}</h2>
+                    <h2>{`${formatNumberToString({ numberToFormat: coin1Amount })} ${coin1Info?.symbol.toUpperCase()} = ${formatNumberToString({ numberToFormat: coin2Amount })} ${coin2Info?.symbol.toUpperCase()}`}</h2>
                 </div>
 
                 <Button

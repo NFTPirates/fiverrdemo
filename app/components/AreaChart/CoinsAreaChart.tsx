@@ -1,6 +1,6 @@
 'use client';
 
-import styles from './styles.module.css';
+import styles from './areaChart.module.css';
 import React, { useEffect } from 'react';
 import {
     AreaChart,

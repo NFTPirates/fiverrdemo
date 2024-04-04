@@ -12,7 +12,7 @@ import {
 import { Coin } from '@/app/types/coin';
 import { Currency } from '@/app/types/currency';
 import Link from 'next/link';
-import styles from './styles.module.css';
+import styles from './priceTable.module.css';
 import { formatNumberToString } from '@/app/utils/utils';
 
 interface IPriceTableProps {

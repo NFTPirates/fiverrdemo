@@ -10,6 +10,8 @@ import { Faq } from '@/app/components/Faq/Faq';
 import { Coin } from '@/app/types/coin';
 import { Currency } from '@/app/types/currency';
 import { getConversion } from '@/app/services/conversion.service';
+import Header from '@/app/components/Header/Header';
+import FollowUsBanner from '@/app/components/FollowUsBanner/FollowUsBanner';
 
 export interface IGetCoinHistoricPriceResponse {
     prices: [string[]];
@@ -125,8 +127,19 @@ async function getTotalConversion(
     });
 
     //TODO FIX TYPE
-    if (!conversion) {
-        return 1;
+    console.log(conversion, 'conv');
+    if (!conversion?.conversion) {
+        const coin1Price = coin1?.market_data?.current_price.usd;
+        const coin2Price = coin2?.market_data?.current_price.usd;
+        console.log(coin1Price, 'priice');
+        console.log(coin2Price, 'priice');
+
+        if (coin1Price && coin2Price) {
+            console.log(coin1Price / coin2Price, 'priice');
+
+            return { conversion: coin1Price / coin2Price };
+        }
+        return;
     }
 
     return conversion;
@@ -182,19 +195,17 @@ export default async function Page({ params }: { params: { pair: string } }) {
     return (
         <main>
             <div className={styles.container}>
-                <div className={styles.container__header}>
-                    <h1 className={styles.container__header__title}>
-                        {/* {`Convert ${coin1?.symbol} to ${coin2.symbol}`} */}
-                    </h1>
-                    <h2 className={styles.container__header_subTitle}>
-                        Convert your fiat coins to crypto and vice verse
-                    </h2>
-                </div>
+                <Header
+                    coin1={coin1}
+                    coin2={coin2}
+                    conversion={conversion?.conversion}
+                ></Header>
                 <Conversion
                     defaultCoin1Info={coin1}
                     defaultCoin2Info={coin2}
                     initialCoin1Amount={Number(coin1Amount)}
                 ></Conversion>
+                <FollowUsBanner></FollowUsBanner>
                 <CoinsAreaChart
                     coinsHistoricPriceResponse={coinsHistoricPriceResponse}
                     coin1Id={coin1Id}
@@ -208,8 +219,8 @@ export default async function Page({ params }: { params: { pair: string } }) {
                     ></PriceTable>
                     <PriceTable
                         priceTableData={priceTableData?.switchedArray}
-                        defaultCoin1Info={coin1}
-                        defaultCoin2Info={coin2}
+                        defaultCoin1Info={coin2}
+                        defaultCoin2Info={coin1}
                     ></PriceTable>
                 </div>
                 <Faq

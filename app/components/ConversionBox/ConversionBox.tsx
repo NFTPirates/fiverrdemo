@@ -4,7 +4,7 @@ import { Currency } from '@/app/types/currency';
 import { Input } from '@nextui-org/react';
 import { Dispatch, SetStateAction } from 'react';
 import NextUiDropdown from '../Dropdown/Dropdown';
-import styles from './styles.module.css';
+import styles from './conversionBox.module.css';
 
 interface IConversionBoxProps {
     setCoinAmount: Dispatch<SetStateAction<number>>;

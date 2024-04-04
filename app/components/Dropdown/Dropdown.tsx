@@ -11,7 +11,7 @@ import {
 import { SearchIcon } from '../SearchIcon';
 import { Coin } from '../../types/coin';
 import { Image } from '@nextui-org/react';
-import styles from './styles.module.css';
+import styles from './dropdown.module.css';
 import coinSearch from '@/app/services/search.service';
 import { Currency } from '@/app/types/currency';
 import getFiat from '@/app/services/fiat.service';
@@ -115,7 +115,13 @@ export default function NextUiDropdown(props: INextUiDropdownProps) {
                             height={30}
                             src={props.coinInfo?.image}
                         ></Image>
-                        <p>{props.coinInfo?.symbol}</p>
+                        <p
+                            className={
+                                styles.dropDownTrigger__button__content__symbol
+                            }
+                        >
+                            {props.coinInfo?.symbol.toUpperCase()}
+                        </p>
                     </div>
                 </Button>
             </DropdownTrigger>

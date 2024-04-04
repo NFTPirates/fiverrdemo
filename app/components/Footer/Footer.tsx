@@ -3,8 +3,8 @@ import SubscribeNewsletter from '../SubscribeNewsletter/SubscribeNewsletter';
 import styles from './footer.module.css';
 
 const Legal = [
-    { name: 'Terms & Conditions', link: './convert' },
-    { name: 'Privacy Policy', link: './news' },
+    { name: 'Terms & Conditions', link: './terms-and-conditions' },
+    { name: 'Privacy Policy', link: './privacy-policy' },
 ];
 const ProductLinks = [
     { name: 'Converter', link: './convert' },

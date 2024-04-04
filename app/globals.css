@@ -50,6 +50,7 @@ h3 {
 p {
     font-weight: normal;
     font-size: medium;
+    color: var(--foreground);
 }
 
 p,

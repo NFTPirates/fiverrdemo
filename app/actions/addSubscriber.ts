@@ -9,12 +9,8 @@ export async function addSubscriber(
     formData: FormData
 ) {
     // Return early if the form data is invalid
-    console.log(formData);
-    console.log(formData.entries().next());
 
     const supaBase = createClient();
-
-    console.log(supaBase, 'supa');
 
     const { data, error } = await supaBase
         .from('users')

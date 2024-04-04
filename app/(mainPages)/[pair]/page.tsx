@@ -127,16 +127,11 @@ async function getTotalConversion(
     });
 
     //TODO FIX TYPE
-    console.log(conversion, 'conv');
     if (!conversion?.conversion) {
         const coin1Price = coin1?.market_data?.current_price.usd;
         const coin2Price = coin2?.market_data?.current_price.usd;
-        console.log(coin1Price, 'priice');
-        console.log(coin2Price, 'priice');
 
         if (coin1Price && coin2Price) {
-            console.log(coin1Price / coin2Price, 'priice');
-
             return { conversion: coin1Price / coin2Price };
         }
         return;

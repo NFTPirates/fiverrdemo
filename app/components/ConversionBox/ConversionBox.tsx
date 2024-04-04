@@ -23,9 +23,7 @@ export default function ConversionBox(props: IConversionBoxProps) {
             ></NextUiDropdown>
             <Input
                 className={styles.container__input}
-                value={formatNumberToString({
-                    numberToFormat: props.coinAmount,
-                })}
+                value={props.coinAmount?.toString()}
                 size={'lg'}
                 type="number"
                 label="Amount"

@@ -11,12 +11,12 @@ import {
 } from '@nextui-org/react';
 import Image from 'next/image';
 const MenuItems = [
-    { name: 'Converter', link: './convert' },
-    { name: 'News', link: './news' },
+    { name: 'Home', link: './' },
     { name: 'Blog', link: './blog' },
-    { name: 'Predictions', link: './predictions' },
-    { name: 'Calculator', link: './calculator' },
+    { name: 'Contact Us', link: './contact' },
+    { name: 'Privacy & TOS', link: './privacy-tos' },
     { name: 'Newsletter', link: './newsletter' },
+    { name: 'About Us', link: './about' },
 ];
 
 export default function NavigationBar() {

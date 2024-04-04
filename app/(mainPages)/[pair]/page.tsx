@@ -12,6 +12,7 @@ import { Currency } from '@/app/types/currency';
 import { getConversion } from '@/app/services/conversion.service';
 import Header from '@/app/components/Header/Header';
 import FollowUsBanner from '@/app/components/FollowUsBanner/FollowUsBanner';
+import PriceStats from '@/app/components/PriceStats/PriceStats';
 
 export interface IGetCoinHistoricPriceResponse {
     prices: [string[]];
@@ -218,6 +219,8 @@ export default async function Page({ params }: { params: { pair: string } }) {
                         defaultCoin2Info={coin1}
                     ></PriceTable>
                 </div>
+                {/* @ts-ignore */}
+                <PriceStats coin1={coin1} coin2={coin2}></PriceStats>
                 <Faq
                     coin1={coin1}
                     coin2={coin2}

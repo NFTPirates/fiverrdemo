@@ -1,0 +1,33 @@
+.container {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    color: var(--foreground);
+}
+
+.container__content__percentageWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.container__percentageWrapper {
+    display: flex;
+    flex-direction: row;
+    border: 2px solid var(--green);
+    width: 80%;
+    height: 60px;
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 15px;
+}
+
+@media (min-width: 1024px) {
+    .container__content__percentageWrapper {
+        display: flex;
+        flex-direction: row;
+    }
+}

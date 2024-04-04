@@ -46,7 +46,9 @@ export default function PriceTable(props: IPriceTableProps) {
                         >
                             {formatNumberToString({
                                 numberToFormat: item.coin1,
-                            })}
+                            }) +
+                                ' ' +
+                                props.defaultCoin1Info?.symbol.toUpperCase()}
                         </Link>
                     );
                 case 'coin2':
@@ -57,7 +59,9 @@ export default function PriceTable(props: IPriceTableProps) {
                         >
                             {formatNumberToString({
                                 numberToFormat: item.coin2,
-                            })}
+                            }) +
+                                ' ' +
+                                props.defaultCoin2Info?.symbol.toUpperCase()}
                         </Link>
                     );
                 default:

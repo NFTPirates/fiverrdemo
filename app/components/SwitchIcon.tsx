@@ -2,6 +2,8 @@ import React from 'react';
 export const SwitchIcon = () => (
     <svg
         viewBox="-348.16 -348.16 1720.32 1720.32"
+        height={100}
+        width={100}
         xmlns="http://www.w3.org/2000/svg"
         fill="#3D405B"
         stroke="#3D405B"

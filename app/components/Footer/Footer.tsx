@@ -39,12 +39,18 @@ export default function Footer() {
                         );
                     })}
                 </div>
-                <div className={styles.container__Column}>
+                <div className="hidden md:flex flex flex-col">
                     <h3>Contact</h3>
                     <Link href={'mailto:piratesConvert@conver.com'}>
                         piratesConvert@conver.com
                     </Link>
                 </div>
+            </div>
+            <div className="md:hidden flex flex-col my-10 w-full">
+                <h3>Contact</h3>
+                <Link href={'mailto:piratesConvert@conver.com'}>
+                    piratesConvert@conver.com
+                </Link>
             </div>
         </div>
     );

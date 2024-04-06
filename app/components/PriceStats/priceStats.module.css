@@ -17,7 +17,7 @@
 .container__percentageWrapper {
     display: flex;
     flex-direction: row;
-    border: 2px solid var(--green);
+    border: 3px solid var(--background1);
     width: 80%;
     height: 60px;
     justify-content: space-evenly;
@@ -25,9 +25,24 @@
     border-radius: 15px;
 }
 
+.container__content__text {
+    padding: 20px;
+}
+
 @media (min-width: 1024px) {
     .container__content__percentageWrapper {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
+        width: 40%;
+    }
+
+    .container__content {
+        display: flex;
+        align-items: center;
+    }
+
+    .container__content__text {
+        width: 40%;
+        padding: 20px;
     }
 }

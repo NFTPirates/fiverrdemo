@@ -87,6 +87,7 @@ export default function Conversion(props: IConversion) {
                     setCoinAmount={setCoin2Amount}
                     coinInfo={coin2Info}
                     setCoinInfo={setCoin2Info}
+                    readOnly={true}
                 ></ConversionBox>
             </div>
 

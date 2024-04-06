@@ -122,6 +122,7 @@ export async function getCoinHistoricChart(
 interface IGetCoinPriceAtDateProps {
     coinId?: string;
     date: Date;
+    againstFiat?: string;
 }
 
 export async function getCoinPriceAtDate(props: IGetCoinPriceAtDateProps) {
@@ -129,7 +130,6 @@ export async function getCoinPriceAtDate(props: IGetCoinPriceAtDateProps) {
         return;
     }
     const date = format(props.date, 'dd-MM-yyyy');
-    console.log(date, 'date');
     const url = `https://pro-api.coingecko.com/api/v3/coins/${props.coinId}/history?date=${date}&localization=false`;
     const res = await fetch(url, {
         headers: {
@@ -138,12 +138,12 @@ export async function getCoinPriceAtDate(props: IGetCoinPriceAtDateProps) {
         },
     });
 
-    console.log(url);
     if (!res.ok) {
         return;
     }
 
     const result = (await res.json()) as GetCoinHistoryResponse;
 
-    return result.market_data?.current_price.usd;
+    /* @ts-ignore */
+    return result.market_data?.current_price[props.againstFiat ?? 'usd'];
 }

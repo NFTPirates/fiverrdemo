@@ -12,10 +12,17 @@ interface IConversionBoxProps {
     coinAmount: number | undefined;
     coinInfo: Coin | Currency | undefined;
     setCoinInfo: Dispatch<SetStateAction<Coin | Currency | undefined>>;
+    readOnly?: boolean;
 }
 
 export default function ConversionBox(props: IConversionBoxProps) {
-    console.log(props.coinAmount, 'amount');
+    const amountValue = () => {
+        if (props.coinAmount && props.coinAmount < 0.00001) {
+            return props.coinAmount.toFixed(14);
+        }
+
+        return props.coinAmount;
+    };
 
     return (
         <div className={styles.container}>
@@ -24,11 +31,12 @@ export default function ConversionBox(props: IConversionBoxProps) {
                 setCoinInfo={props.setCoinInfo}
             ></NextUiDropdown>
             <Input
-                className={styles.container__input}
-                value={props.coinAmount}
+                className={styles.container__input} /* @ts-ignore */
+                value={amountValue()}
                 size={'lg'}
                 type="number"
                 label="Amount"
+                readOnly={props.readOnly}
                 placeholder="0.00"
                 onValueChange={(val) => props.setCoinAmount(Number(val))}
             />

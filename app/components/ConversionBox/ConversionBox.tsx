@@ -15,6 +15,8 @@ interface IConversionBoxProps {
 }
 
 export default function ConversionBox(props: IConversionBoxProps) {
+    console.log(props.coinAmount, 'amount');
+
     return (
         <div className={styles.container}>
             <NextUiDropdown
@@ -23,7 +25,7 @@ export default function ConversionBox(props: IConversionBoxProps) {
             ></NextUiDropdown>
             <Input
                 className={styles.container__input}
-                value={props.coinAmount?.toString()}
+                value={props.coinAmount}
                 size={'lg'}
                 type="number"
                 label="Amount"

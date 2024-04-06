@@ -59,7 +59,7 @@ export default function Conversion(props: IConversion) {
     };
 
     const conversionUrl =
-        coin1Amount > 1
+        coin1Amount != 1
             ? `${coin1Amount}-${coin1Info?.id}-to-${coin2Info?.id}`
             : `${coin1Info?.id}-${coin2Info?.id}`;
 

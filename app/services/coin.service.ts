@@ -33,6 +33,12 @@ export async function getCoin(props: IGetCoinProps): Promise<Coin | undefined> {
     }
 
     const data = (await res.json()) as GetCoinResponse;
+
+    if (data.symbol === 'usd+') {
+        // there's this extra weird fiat coin
+        return undefined;
+    }
+
     const result: Coin = {
         id: data.id,
         image: data.image.thumb,

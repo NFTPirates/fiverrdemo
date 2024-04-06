@@ -2,18 +2,15 @@ import Link from 'next/link';
 import SubscribeNewsletter from '../SubscribeNewsletter/SubscribeNewsletter';
 import styles from './footer.module.css';
 
-const Legal = [
-    { name: 'Terms & Conditions', link: './terms-and-conditions' },
-    { name: 'Privacy Policy', link: './privacy-policy' },
-];
+const Legal = [{ name: 'Privacy & TOS', link: './privacy-tos' }];
 const ProductLinks = [
-    { name: 'Converter', link: './convert' },
-    { name: 'News', link: './news' },
+    { name: 'Home', link: './' },
     { name: 'Blog', link: './blog' },
-    { name: 'Predictions', link: './predictions' },
-    { name: 'Calculator', link: './calculator' },
     { name: 'Newsletter', link: './newsletter' },
+    { name: 'About Us', link: './about' },
+    { name: 'Contact Us', link: './contact' },
 ];
+
 export default function Footer() {
     return (
         <div className={styles.container}>

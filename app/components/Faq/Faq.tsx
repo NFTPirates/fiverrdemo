@@ -23,6 +23,7 @@ export const Faq = (props: IFaqProps) => {
                     key="1"
                     aria-label="Accordion 1"
                     title={`What is 1 ${coin1Symbol} to ${coin2Symbol} price today`}
+                    classNames={{ title: 'text-primary' }}
                 >
                     {`The price for ${coin1Symbol} to ${coin2Symbol} today on ${new Date().toLocaleDateString()} is ${formatNumberToString({ numberToFormat: props.conversion })}`}
                 </AccordionItem>
@@ -30,10 +31,12 @@ export const Faq = (props: IFaqProps) => {
                     key="2"
                     aria-label="Accordion 2"
                     title={`Where to buy ${props.coin1?.id}`}
+                    classNames={{ title: 'text-primary' }}
                 >
                     {defaultContent}
                 </AccordionItem>
                 <AccordionItem
+                    classNames={{ title: 'text-primary' }}
                     key="3"
                     aria-label="Accordion 3"
                     title={`Where to buy ${props.coin2?.id}`}

@@ -122,14 +122,10 @@ async function getTotalConversion(
     coin1?: Coin | Currency,
     coin2?: Coin | Currency
 ): Promise<any> {
-    console.log(coin1, coin2, 'conv');
-
     const conversion = await getCoinPriceAgainstCurrency({
         coin1Id: coin1?.id,
         coin2Id: coin2?.id,
     });
-
-    console.log(conversion);
 
     //TODO FIX TYPE
     if (!conversion?.conversion) {
@@ -189,7 +185,7 @@ export default async function Page({ params }: { params: { pair: string } }) {
             coin1Id: coin1Id,
             coin2Id: coin2Id,
         });
-    } else if (coin1Data && coin1Data) {
+    } else if (coin1Data && coin2Data) {
         priceTableData = await getPriceTableDataForCoins({
             coin1Price: coin1Data?.market_data?.current_price.usd,
             coin2Price: coin2Data?.market_data?.current_price.usd,

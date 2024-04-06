@@ -3,9 +3,16 @@ import { Coin } from '@/app/types/coin';
 import { Currency } from '@/app/types/currency';
 import { formatNumberToPercentageString } from '@/app/utils/utils';
 import { add } from 'date-fns';
+import classNames from 'classnames';
+
 interface IPriceStatsProps {
     coin1?: Coin | Currency;
     coin2?: Coin | Currency;
+}
+
+interface IPercentageChangeResult {
+    value: string;
+    isPositive: boolean;
 }
 
 import styles from './priceStats.module.css';
@@ -20,7 +27,7 @@ export default async function PriceStats(props: IPriceStatsProps) {
         coin2CurrentPrice?: number;
         coin1PreviousDatePrice?: number;
         coin2PreviousDatePrice?: number;
-    }): string | undefined => {
+    }): IPercentageChangeResult | undefined => {
         if (
             !props.coin1CurrentPrice ||
             !props.coin2CurrentPrice ||
@@ -37,15 +44,20 @@ export default async function PriceStats(props: IPriceStatsProps) {
         const percentageChange =
             ((conversionNow - previousConversion) / previousConversion) * 100;
 
-        return formatNumberToPercentageString({
+        const percentageString = formatNumberToPercentageString({
             numberToFormat: percentageChange,
         });
+
+        return {
+            value: percentageString,
+            isPositive: percentageChange > 0,
+        };
     };
 
     const calculatePercentageChangeAgainstFiat = (props: {
         coin1CurrentPrice?: number;
         coin1PreviousDatePrice?: number;
-    }): string | undefined => {
+    }): IPercentageChangeResult | undefined => {
         if (!props.coin1CurrentPrice || !props.coin1PreviousDatePrice) {
             return;
         }
@@ -55,9 +67,14 @@ export default async function PriceStats(props: IPriceStatsProps) {
                 props.coin1PreviousDatePrice) *
             100;
 
-        return formatNumberToPercentageString({
+        const percentageString = formatNumberToPercentageString({
             numberToFormat: percentageChange,
         });
+
+        return {
+            value: percentageString,
+            isPositive: percentageChange > 0,
+        };
     };
 
     const currentDate = new Date();
@@ -218,18 +235,20 @@ export default async function PriceStats(props: IPriceStatsProps) {
                     >
                         <div className={styles.container__percentageWrapper}>
                             <p>24h Change</p>
-                            <p className="text-2xl">{percentageChange24hAgo}</p>
+                            <p className={'text-2xl'}>
+                                {percentageChange24hAgo.value}
+                            </p>
                         </div>
                         <div className={styles.container__percentageWrapper}>
                             <p>7 Days Change</p>
-                            <p className="text-2xl">
-                                {percentageChange7DaysAgo}
+                            <p className={'text-2xl'}>
+                                {percentageChange7DaysAgo?.value}
                             </p>
                         </div>
                         <div className={styles.container__percentageWrapper}>
                             <p>30 Days Change</p>
                             <p className="text-2xl">
-                                {percentageChange30DaysAgo}
+                                {percentageChange30DaysAgo?.value}
                             </p>
                         </div>
                     </div>

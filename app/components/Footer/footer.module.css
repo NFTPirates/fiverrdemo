@@ -7,6 +7,7 @@
     align-items: center;
     padding: 40px 20px;
     width: 100%;
+    margin-top: 100px;
 }
 
 .container__info {
@@ -24,5 +25,6 @@
 @media (min-width: 1024px) {
     .container {
         padding: 40px 200px;
+        margin-top: 20px;
     }
 }

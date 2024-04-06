@@ -48,13 +48,15 @@ export default function NavigationBar() {
         >
             <NavbarContent>
                 <NavbarBrand>
-                    <Image
-                        src={'/logo.png'}
-                        height={50}
-                        width={50}
-                        alt=""
-                    ></Image>
-                    <p className="font-bold text-inherit">ACME</p>
+                    <Link href="./" className="decoration-black">
+                        <Image
+                            src={'/logo.png'}
+                            height={50}
+                            width={50}
+                            alt=""
+                        ></Image>
+                        <p className="font-bold text-inherit">ACME</p>
+                    </Link>
                 </NavbarBrand>
             </NavbarContent>
 

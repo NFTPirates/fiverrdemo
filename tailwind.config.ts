@@ -24,7 +24,7 @@ const config: Config = {
                 light: {
                     layout: {},
                     colors: {
-                        primary: '#81b29a', // green
+                        primary: '#3d405b', // black
                         secondary: '#f4f1de', // white
                         danger: '#e07a5f', //red
                     },

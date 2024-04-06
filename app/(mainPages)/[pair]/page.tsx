@@ -212,6 +212,8 @@ export default async function Page({ params }: { params: { pair: string } }) {
                     coin1Id={coin1Id}
                     coin2Id={coin2Id}
                 ></CoinsAreaChart>
+                {/* @ts-ignore */}
+                <PriceStats coin1={coin1} coin2={coin2}></PriceStats>
                 <div className={styles.container__priceTable}>
                     <PriceTable
                         priceTableData={priceTableData?.normalArray}
@@ -224,8 +226,6 @@ export default async function Page({ params }: { params: { pair: string } }) {
                         defaultCoin2Info={coin1}
                     ></PriceTable>
                 </div>
-                {/* @ts-ignore */}
-                <PriceStats coin1={coin1} coin2={coin2}></PriceStats>
                 <Faq
                     coin1={coin1}
                     coin2={coin2}

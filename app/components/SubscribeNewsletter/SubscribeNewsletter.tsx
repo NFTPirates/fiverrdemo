@@ -85,7 +85,7 @@ export function Form() {
     const [email, setEmail] = useState('');
 
     useEffect(() => {
-        if (!state) {
+        if (!state.message) {
             return;
         }
 

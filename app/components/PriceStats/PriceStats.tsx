@@ -2,8 +2,7 @@ import { getCoinPriceAtDate } from '@/app/services/coin.service';
 import { Coin } from '@/app/types/coin';
 import { Currency } from '@/app/types/currency';
 import { formatNumberToPercentageString } from '@/app/utils/utils';
-import { add } from 'date-fns';
-import classNames from 'classnames';
+import { add, format } from 'date-fns';
 
 interface IPriceStatsProps {
     coin1?: Coin | Currency;
@@ -228,7 +227,7 @@ export default async function PriceStats(props: IPriceStatsProps) {
     if (percentageChange24hAgo) {
         return (
             <div className={styles.container}>
-                <h2>{`${props.coin1?.symbol.toUpperCase()} to ${props.coin2?.symbol.toUpperCase()} price stats for the current month`}</h2>
+                <h2>{`${props.coin1?.symbol.toUpperCase()} to ${props.coin2?.symbol.toUpperCase()} price stats for the ${format(new Date(), 'MMMM yyyy')}`}</h2>
                 <div className={styles.container__content}>
                     <div
                         className={styles.container__content__percentageWrapper}

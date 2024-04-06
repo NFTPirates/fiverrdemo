@@ -55,6 +55,8 @@ export default function NextUiDropdown(props: INextUiDropdownProps) {
 
     useEffect(() => {
         const queryApi = async () => {
+            console.log(currentQuery, 'currentQuery');
+
             const result = await coinSearch({ currentQuery: currentQuery });
 
             if (result) {
@@ -65,19 +67,6 @@ export default function NextUiDropdown(props: INextUiDropdownProps) {
         queryApi();
     }, [currentQuery]);
 
-    const handleKeyDown = async (event: any) => {
-        //if not letter
-        if (event.code === 'Backspace') {
-            setCurrentQuery((old) => old.slice(0, old.length - 1));
-            return;
-        }
-
-        if (event.code !== `Key${event.key.toUpperCase()}`) {
-            return;
-        }
-
-        setCurrentQuery((old) => old + event.key);
-    };
     const createDropdownItems = (): any => {
         const arr: React.JSX.Element[] = [];
 
@@ -143,7 +132,8 @@ export default function NextUiDropdown(props: INextUiDropdownProps) {
                             inputWrapper:
                                 'h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20',
                         }}
-                        onKeyDown={handleKeyDown}
+                        // onKeyDown={handleKeyDown}
+                        onValueChange={(val) => setCurrentQuery(val)}
                         placeholder="Type to search..."
                         size="sm"
                         startContent={

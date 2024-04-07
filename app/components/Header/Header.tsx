@@ -25,7 +25,7 @@ export default function Header(props: IHeaderProps) {
             </h1>
             <h2>{`How much is ${props.coin1Amount} ${props.coin1?.id} worth in ${coin2Symbol}?`}</h2>
             <h2>
-                {`Current value of 1 ${coin1Symbol} in ${coin2Symbol} is ${conversion}`}
+                {`Current value of ${props.coin1Amount} ${coin1Symbol} in ${coin2Symbol} is ${conversion}`}
             </h2>
 
             <div className="lg:w-9/12">

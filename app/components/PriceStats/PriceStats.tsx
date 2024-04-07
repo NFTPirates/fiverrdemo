@@ -252,10 +252,10 @@ export default async function PriceStats(props: IPriceStatsProps) {
                         </div>
                     </div>
                     <p className={styles.container__content__text}>
-                        {`Over the past 30 days, ${coin1Id} has lost ${percentageChange30DaysAgo} to ${coin2Id}.
+                        {`Over the past 30 days, ${coin1Id} has ${percentageChange30DaysAgo?.isPositive ? 'gained' : 'lost'} ${percentageChange30DaysAgo?.value} to ${coin2Id}.
                     The trend and price charts for the past week shows that
-                     ${conin1Symbol} has lost ${percentageChange7DaysAgo} to  ${conin2Symbol} and over the
-                    past 24 hours, ${coin1Id}  has gained ${percentageChange24hAgo} to ${coin2Id} .`}
+                     ${conin1Symbol} has ${percentageChange7DaysAgo?.isPositive ? 'gained' : 'lost'} ${percentageChange7DaysAgo?.value} to  ${conin2Symbol} and over the
+                    past 24 hours, ${coin1Id}  has ${percentageChange24hAgo?.isPositive ? 'gained' : 'lost'} ${percentageChange24hAgo.value} to ${coin2Id} .`}
                     </p>
                 </div>
             </div>

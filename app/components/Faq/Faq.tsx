@@ -9,6 +9,7 @@ interface IFaqProps {
     coin1?: Coin;
     coin2?: Coin;
     conversion: number;
+    coin1Amount: string;
 }
 export const Faq = (props: IFaqProps) => {
     const defaultContent = 'Lorem ipsum dolor';
@@ -17,15 +18,15 @@ export const Faq = (props: IFaqProps) => {
 
     return (
         <div className={styles.container}>
-            <h2>{`FAQs for 1 ${coin1Symbol} to ${coin2Symbol}`}</h2>
+            <h2>{`FAQs for ${props.coin1Amount} ${coin1Symbol} to ${coin2Symbol}`}</h2>
             <Accordion variant="light">
                 <AccordionItem
                     key="1"
                     aria-label="Accordion 1"
-                    title={`What is 1 ${coin1Symbol} to ${coin2Symbol} price today`}
+                    title={`What is ${props.coin1Amount} ${coin1Symbol} to ${coin2Symbol} price today`}
                     classNames={{ title: 'text-primary' }}
                 >
-                    {`The price for ${coin1Symbol} to ${coin2Symbol} today on ${new Date().toLocaleDateString()} is ${formatNumberToString({ numberToFormat: props.conversion })}`}
+                    {`The price for ${props.coin1Amount} ${coin1Symbol} to ${coin2Symbol} today on ${new Date().toLocaleDateString()} is ${formatNumberToString({ numberToFormat: props.conversion * Number(props.coin1Amount) })}`}
                 </AccordionItem>
                 <AccordionItem
                     key="2"

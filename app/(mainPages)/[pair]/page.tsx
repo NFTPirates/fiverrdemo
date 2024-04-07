@@ -230,6 +230,7 @@ export default async function Page({ params }: { params: { pair: string } }) {
                     coin1={coin1}
                     coin2={coin2}
                     conversion={conversion?.conversion}
+                    coin1Amount={coin1Amount}
                 ></Faq>
             </div>
         </main>

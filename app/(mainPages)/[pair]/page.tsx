@@ -110,11 +110,15 @@ export async function generateMetadata(
     const coin1Fiat = getFiat({ fiatId: coin1Id });
     const coin2Fiat = getFiat({ fiatId: coin2Id });
 
+    const coin1 = coin1Data ?? coin1Fiat;
+    const coin2 = coin2Data ?? coin2Fiat;
+    const coin1Symbol = coin1?.symbol?.toUpperCase();
+    const coin2Symbol = coin2?.symbol?.toUpperCase();
+
     return {
-        title: `Convert ${coin1Amount} ${coin1Data?.symbol ?? coin1Fiat?.symbol} to ${coin2Data?.symbol ?? coin2Fiat?.symbol} (${coin1Amount} ${coin1Data?.id ?? coin1Fiat?.id} to ${coin2Data?.id ?? coin2Fiat?.id})`,
-        description: `Convert ${coin1Amount} ${coin1Data?.symbol ?? coin1Fiat?.symbol} to ${coin2Data?.symbol ?? coin2Fiat?.symbol} (${coin1Amount} ${coin1Data?.id ?? coin1Fiat?.id} to ${coin2Data?.id ?? coin2Fiat?.id})`,
-        keywords:
-            'Convert 1 BTC to ETH,1 Bitcoin to Ethereum,BTC,ETH,Bitcoin,Ethereum,crypto calculator, crypto converter',
+        title: `Convert ${coin1Amount} ${coin1Symbol} to ${coin2Symbol} (${coin1Amount} ${coin1?.id} to ${coin2?.id})`,
+        description: `Convert ${coin1Amount} ${coin1Symbol} to ${coin2Symbol} (${coin1Amount} ${coin1?.id} to ${coin2?.id})`,
+        keywords: `Convert ${coin1Amount} ${coin1Symbol} to ${coin2Symbol} ,${coin1Amount} ${coin1?.id} to ${coin2?.id},${coin1Symbol},${coin2Symbol},${coin1?.id},${coin2?.id},crypto calculator, crypto converter`,
     };
 }
 

@@ -37,12 +37,15 @@ export default function PriceTable(props: IPriceTableProps) {
 
     const renderCell = React.useCallback(
         (item: { coin1: number; coin2: number }, columnKey: React.Key) => {
+            const coin1Symbol = props.defaultCoin1Info?.symbol.toLowerCase();
+            const coin2Symbol = props.defaultCoin2Info?.symbol.toLowerCase();
+
             switch (columnKey) {
                 case 'coin1':
                     return (
                         <Link
                             className="flex flex-col"
-                            href={`${item.coin1}-${props.defaultCoin1Info?.id}-to-${props.defaultCoin2Info?.id}`}
+                            href={`${item.coin1}-${coin1Symbol}-to-${coin2Symbol}`}
                         >
                             {formatNumberToString({
                                 numberToFormat: item.coin1,
@@ -55,7 +58,7 @@ export default function PriceTable(props: IPriceTableProps) {
                     return (
                         <Link
                             className="flex flex-col"
-                            href={`${item.coin1}-${props.defaultCoin1Info?.id}-to-${props.defaultCoin2Info?.id}`}
+                            href={`${item.coin1}-${coin1Symbol}-to-${coin2Symbol}`}
                         >
                             {formatNumberToString({
                                 numberToFormat: item.coin2,

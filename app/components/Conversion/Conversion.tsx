@@ -1,9 +1,11 @@
 'use client';
+import { setCookie } from '@/app/actions/setCookie';
 import { getConversion } from '@/app/services/conversion.service';
 import { Coin } from '@/app/types/coin';
 import { Currency } from '@/app/types/currency';
 import { formatNumberToString } from '@/app/utils/utils';
 import { Button } from '@nextui-org/react';
+import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import ConversionBox from '../ConversionBox/ConversionBox';
@@ -46,6 +48,8 @@ export default function Conversion(props: IConversion) {
                 return;
             }
 
+            setCookie({ coin1Id: coin1Info?.id, coin2Id: coin2Info?.id });
+
             setCoin2Amount(conversion);
         }
 
@@ -60,8 +64,8 @@ export default function Conversion(props: IConversion) {
 
     const conversionUrl =
         coin1Amount != 1
-            ? `${coin1Amount}-${coin1Info?.id}-to-${coin2Info?.id}`
-            : `${coin1Info?.id}-${coin2Info?.id}`;
+            ? `${coin1Amount}-${coin1Info?.symbol.toLowerCase()}-to-${coin2Info?.symbol.toLowerCase()}`
+            : `${coin1Info?.symbol.toLowerCase()}-${coin2Info?.symbol.toLowerCase()}`;
 
     return (
         <div className={styles.container}>

@@ -11,6 +11,11 @@ export interface ProvidersProps {
 }
 
 export function Providers({ children }: { children: React.ReactNode }) {
+    const [coin1Id, setCoin1Id] = React.useState('');
+    const [coin2Id, setCoin2Id] = React.useState('');
+
+    const value = { coin1Id, setCoin1Id, coin2Id, setCoin2Id };
+
     return (
         <NextUIProvider>
             {/* @ts-ignore */}

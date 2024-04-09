@@ -3,6 +3,7 @@ import Conversion from '../components/Conversion/Conversion';
 import { getCoin } from '../services/coin.service';
 import getFiat from '../services/fiat.service';
 import { Metadata } from 'next';
+import React from 'react';
 
 export async function generateMetadata(): Promise<Metadata> {
     const defaultCoinInfo = await getCoin({ coinId: 'bitcoin' });

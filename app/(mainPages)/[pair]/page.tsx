@@ -9,10 +9,10 @@ import { getCoinPriceAgainstCurrency } from '@/app/services/price.service';
 import { Faq } from '@/app/components/Faq/Faq';
 import { Coin } from '@/app/types/coin';
 import { Currency } from '@/app/types/currency';
-import { getConversion } from '@/app/services/conversion.service';
 import Header from '@/app/components/Header/Header';
 import FollowUsBanner from '@/app/components/FollowUsBanner/FollowUsBanner';
 import PriceStats from '@/app/components/PriceStats/PriceStats';
+import { cookies } from 'next/headers';
 
 export interface IGetCoinHistoricPriceResponse {
     prices: [string[]];
@@ -150,17 +150,19 @@ async function getTotalConversion(
 }
 
 export default async function Page({ params }: { params: { pair: string } }) {
+    const cookieStore = cookies();
+    const coin1Id = cookieStore.get('coin1Id')?.value;
+    const coin2Id = cookieStore.get('coin2Id')?.value;
+
     const coinsPairArray = params.pair.split('-');
-    let coin1Id = '';
-    let coin2Id = '';
+
     let coin1Amount = '1';
     if (coinsPairArray.length > 2) {
         coin1Amount = coinsPairArray[0];
-        coin1Id = coinsPairArray[1];
-        coin2Id = coinsPairArray[3];
-    } else {
-        coin1Id = coinsPairArray[0];
-        coin2Id = coinsPairArray[1];
+    }
+
+    if (!coin1Id || !coin2Id) {
+        throw new Error('something went wrong');
     }
 
     const coinsHistoricPriceResponse = await getCoinHistoricChart({

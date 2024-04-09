@@ -55,8 +55,6 @@ export default function NextUiDropdown(props: INextUiDropdownProps) {
 
     useEffect(() => {
         const queryApi = async () => {
-            console.log(currentQuery, 'currentQuery');
-
             const result = await coinSearch({ currentQuery: currentQuery });
 
             if (result) {

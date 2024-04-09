@@ -64,6 +64,11 @@ export default function Conversion(props: IConversion) {
 
     const conversionUrl =
         coin1Amount != 1
+            ? `${coin1Amount}-${coin1Info?.id.toLowerCase()}-to-${coin2Info?.id.toLowerCase()}`
+            : `${coin1Info?.id.toLowerCase()}-${coin2Info?.id.toLowerCase()}`;
+
+    const conversionUrlSymbol =
+        coin1Amount != 1
             ? `${coin1Amount}-${coin1Info?.symbol.toLowerCase()}-to-${coin2Info?.symbol.toLowerCase()}`
             : `${coin1Info?.symbol.toLowerCase()}-${coin2Info?.symbol.toLowerCase()}`;
 
@@ -108,6 +113,9 @@ export default function Conversion(props: IConversion) {
                 >
                     View Conversion
                 </Button>
+                <Link href={conversionUrl} as={conversionUrlSymbol}>
+                    test
+                </Link>
             </div>
         </div>
     );

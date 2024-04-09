@@ -92,16 +92,16 @@ export async function generateMetadata(
     parent: ResolvingMetadata
 ): Promise<Metadata> {
     const coinsPairArray = params.pair.split('-');
-    let coin1Id = '';
-    let coin2Id = '';
+    const cookieStore = cookies();
+    const coin1Id = cookieStore.get('coin1Id')?.value;
+    const coin2Id = cookieStore.get('coin2Id')?.value;
     let coin1Amount = '1';
     if (coinsPairArray.length > 2) {
         coin1Amount = coinsPairArray[0];
-        coin1Id = coinsPairArray[1];
-        coin2Id = coinsPairArray[3];
-    } else {
-        coin1Id = coinsPairArray[0];
-        coin2Id = coinsPairArray[1];
+    }
+
+    if (!coin1Id || !coin2Id) {
+        return {};
     }
 
     const coin1Data = await getCoin({ coinId: coin1Id });

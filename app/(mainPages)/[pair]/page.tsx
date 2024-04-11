@@ -103,9 +103,15 @@ export async function generateMetadata(
         paramsCoin1Symbol = coinsPairArray[0];
         paramsCoin2Symbol = coinsPairArray[1];
     }
+    const coin1byTicker = await getCoinByTicker({
+        currentQuery: paramsCoin1Symbol,
+    });
+    const coin2byTicker = await getCoinByTicker({
+        currentQuery: paramsCoin2Symbol,
+    });
 
-    const coin1Data = await getCoin({ coinId: paramsCoin1Symbol });
-    const coin2Data = await getCoin({ coinId: paramsCoin2Symbol });
+    const coin1Data = await getCoin({ coinId: coin1byTicker?.id });
+    const coin2Data = await getCoin({ coinId: coin2byTicker?.id });
 
     const coin1Fiat = getFiat({ fiatId: paramsCoin1Symbol });
     const coin2Fiat = getFiat({ fiatId: paramsCoin2Symbol });

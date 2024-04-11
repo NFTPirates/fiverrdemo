@@ -5,7 +5,6 @@ import { Coin } from '@/app/types/coin';
 import { Currency } from '@/app/types/currency';
 import { formatNumberToString } from '@/app/utils/utils';
 import { Button } from '@nextui-org/react';
-import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import ConversionBox from '../ConversionBox/ConversionBox';
@@ -62,11 +61,6 @@ export default function Conversion(props: IConversion) {
         setCoin2Info(coin1);
     };
 
-    const conversionUrl =
-        coin1Amount != 1
-            ? `${coin1Amount}-${coin1Info?.id.toLowerCase()}-to-${coin2Info?.id.toLowerCase()}`
-            : `${coin1Info?.id.toLowerCase()}-${coin2Info?.id.toLowerCase()}`;
-
     const conversionUrlSymbol =
         coin1Amount != 1
             ? `${coin1Amount}-${coin1Info?.symbol.toLowerCase()}-to-${coin2Info?.symbol.toLowerCase()}`
@@ -106,16 +100,13 @@ export default function Conversion(props: IConversion) {
                 </div>
 
                 <Button
-                    href={conversionUrl}
+                    href={conversionUrlSymbol}
                     as={Link}
                     variant="solid"
                     className={styles.container__content__button}
                 >
                     View Conversion
                 </Button>
-                <Link href={conversionUrl} as={conversionUrlSymbol}>
-                    test
-                </Link>
             </div>
         </div>
     );

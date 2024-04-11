@@ -1,6 +1,7 @@
 import data from '../data/globalCurrencies.json';
 import { Coin } from '../types/coin';
 import { CoinSearchResponse } from '../types/coingecko/searchCoinResponse';
+import { ISearchResponse } from '../types/coingecko/searchResponse';
 
 const SupportedGeckoFiatCur = [
     'btc',
@@ -121,11 +122,12 @@ function getTop3EligibleGeckoFiatCurrency(props: {
     return top3FilteredFiat;
 }
 
+// TODO move this to server and api here
 async function getTop3SearchedCoins(props: {
     currentQuery: string;
 }): Promise<Coin[]> {
     const result = await fetch(
-        `api/convert/search?query=${props.currentQuery}`,
+        `api/convert/search?query=${props.currentQuery}`
     );
 
     if (!result.ok) {
@@ -152,4 +154,35 @@ async function getTop3SearchedCoins(props: {
         };
     });
     return resultTopSearchedCoins;
+}
+
+export async function getCoinByTicker(props: {
+    currentQuery: string;
+}): Promise<Coin | undefined> {
+    const url = 'https://pro-api.coingecko.com/api/v3/search';
+    const res = await fetch(`${url}?query=${props.currentQuery}`, {
+        headers: {
+            'Content-Type': 'application/json',
+            'x-cg-pro-api-key': process.env.CG_API_KEY!,
+        },
+    });
+
+    const queryResponse = (await res.json()) as ISearchResponse;
+
+    if (!queryResponse) {
+        throw new Error('something went wrong');
+    }
+
+    const coin = queryResponse.coins[0];
+
+    if (coin.symbol.toLowerCase() != props.currentQuery) {
+        return;
+    }
+
+    return {
+        id: coin.id,
+        image: coin.thumb,
+        name: coin.name,
+        symbol: coin.symbol,
+    };
 }

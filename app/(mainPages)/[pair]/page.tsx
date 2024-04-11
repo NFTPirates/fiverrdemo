@@ -12,6 +12,7 @@ import { Currency } from '@/app/types/currency';
 import Header from '@/app/components/Header/Header';
 import FollowUsBanner from '@/app/components/FollowUsBanner/FollowUsBanner';
 import PriceStats from '@/app/components/PriceStats/PriceStats';
+import { getCoinByTicker } from '@/app/services/search.service';
 
 export interface IGetCoinHistoricPriceResponse {
     prices: [string[]];
@@ -168,8 +169,11 @@ export default async function Page({ params }: { params: { pair: string } }) {
         days: '7',
     });
 
-    const coin1Data = await getCoin({ coinId: coin1Id });
-    const coin2Data = await getCoin({ coinId: coin2Id });
+    const coin1byTicker = await getCoinByTicker({ currentQuery: coin1Id });
+    const coin2byTicker = await getCoinByTicker({ currentQuery: coin2Id });
+
+    const coin1Data = await getCoin({ coinId: coin1byTicker?.id });
+    const coin2Data = await getCoin({ coinId: coin2byTicker?.id });
 
     const coin1Fiat = getFiat({ fiatId: coin1Id });
     const coin2Fiat = getFiat({ fiatId: coin2Id });

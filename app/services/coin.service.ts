@@ -6,7 +6,7 @@ import getFiat from './fiat.service';
 import { format } from 'date-fns';
 
 interface IGetCoinProps {
-    coinId: string;
+    coinId?: string;
 }
 
 interface IGetCoinHistoricChart {
@@ -16,6 +16,10 @@ interface IGetCoinHistoricChart {
 }
 
 export async function getCoin(props: IGetCoinProps): Promise<Coin | undefined> {
+    if (!props.coinId) {
+        return;
+    }
+
     const coinId = props.coinId.toLowerCase();
     const optionalQueryParams =
         'localization=false&tickers=false&community_data=false&developer_data=false&sparkline=false';

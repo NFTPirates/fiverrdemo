@@ -62,7 +62,9 @@ export default function NextUiDropdown(props: INextUiDropdownProps) {
             }
         };
 
-        queryApi();
+        if (currentQuery.trim().length !== 0) {
+            queryApi();
+        }
     }, [currentQuery]);
 
     const createDropdownItems = (): any => {

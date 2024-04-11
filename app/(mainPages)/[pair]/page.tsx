@@ -92,23 +92,23 @@ export async function generateMetadata(
     parent: ResolvingMetadata
 ): Promise<Metadata> {
     const coinsPairArray = params.pair.split('-');
-    let coin1Id = '';
-    let coin2Id = '';
+    let paramsCoin1Symbol = '';
+    let paramsCoin2Symbol = '';
     let coin1Amount = '1';
     if (coinsPairArray.length > 2) {
         coin1Amount = coinsPairArray[0];
-        coin1Id = coinsPairArray[1];
-        coin2Id = coinsPairArray[3];
+        paramsCoin1Symbol = coinsPairArray[1];
+        paramsCoin2Symbol = coinsPairArray[3];
     } else {
-        coin1Id = coinsPairArray[0];
-        coin2Id = coinsPairArray[1];
+        paramsCoin1Symbol = coinsPairArray[0];
+        paramsCoin2Symbol = coinsPairArray[1];
     }
 
-    const coin1Data = await getCoin({ coinId: coin1Id });
-    const coin2Data = await getCoin({ coinId: coin2Id });
+    const coin1Data = await getCoin({ coinId: paramsCoin1Symbol });
+    const coin2Data = await getCoin({ coinId: paramsCoin2Symbol });
 
-    const coin1Fiat = getFiat({ fiatId: coin1Id });
-    const coin2Fiat = getFiat({ fiatId: coin2Id });
+    const coin1Fiat = getFiat({ fiatId: paramsCoin1Symbol });
+    const coin2Fiat = getFiat({ fiatId: paramsCoin2Symbol });
 
     const coin1 = coin1Data ?? coin1Fiat;
     const coin2 = coin2Data ?? coin2Fiat;

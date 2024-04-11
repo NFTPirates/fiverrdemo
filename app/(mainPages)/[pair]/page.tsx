@@ -193,8 +193,8 @@ export default async function Page({ params }: { params: { pair: string } }) {
     let priceTableData;
     if ((coin1Data && coin2Fiat) || (coin1Fiat && coin2Data)) {
         priceTableData = await getPriceTableDataForFiat({
-            coin1Id: coin1Id,
-            coin2Id: coin2Id,
+            coin1Id: coin1.id,
+            coin2Id: coin2.id,
         });
     } else if (coin1Data && coin2Data) {
         priceTableData = await getPriceTableDataForCoins({

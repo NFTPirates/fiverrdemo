@@ -17,23 +17,24 @@ import { ICoinHistoricPriceChartData } from '@/app/(mainPages)/[pair]/page';
 
 export default function CoinsAreaChart(props: {
     coinsHistoricPriceResponse: ICoinHistoricPriceChartData[];
-    coin1Id: string;
-    coin2Id: string;
+    coin1Id?: string;
+    coin2Id?: string;
 }) {
     const [selected, setSelected] = React.useState<string>('7');
     const [updatedChartData, setUpdatedChartData] = React.useState();
 
     useEffect(() => {
         const getChartData = async () => {
-            const result = await fetch(
-                `/api/coin/${props.coin1Id}/marketChart?days=${selected}&currency=${props.coin2Id}`
-            );
+            const url = `/api/coin/${props.coin1Id}/marketChart?days=${selected}&currency=${props.coin2Id}`;
+            const result = await fetch(url);
 
             if (!result.ok) {
                 return;
             }
 
-            setUpdatedChartData(await result.json());
+            const data = await result.json();
+
+            setUpdatedChartData(data);
         };
 
         try {
@@ -48,7 +49,7 @@ export default function CoinsAreaChart(props: {
             <div className={styles.chartContainer}>
                 <div className={styles.chartContainer__header}>
                     <h2 className={styles.chartContainer__header__title}>
-                        {`${props.coin1Id.toUpperCase()} to ${props.coin2Id.toUpperCase()} daily chart`}
+                        {`${props.coin1Id?.toUpperCase()} to ${props.coin2Id?.toUpperCase()} daily chart`}
                     </h2>
                     <RadioGroup
                         className={styles.chartContainer__header__radio}

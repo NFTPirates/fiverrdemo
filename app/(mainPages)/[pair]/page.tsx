@@ -163,12 +163,6 @@ export default async function Page({ params }: { params: { pair: string } }) {
         coin2Id = coinsPairArray[1];
     }
 
-    const coinsHistoricPriceResponse = await getCoinHistoricChart({
-        coin1Id: coin1Id,
-        coin2Id: coin2Id,
-        days: '7',
-    });
-
     const coin1byTicker = await getCoinByTicker({ currentQuery: coin1Id });
     const coin2byTicker = await getCoinByTicker({ currentQuery: coin2Id });
 
@@ -180,6 +174,16 @@ export default async function Page({ params }: { params: { pair: string } }) {
 
     const coin1 = coin1Data ?? coin1Fiat;
     const coin2 = coin2Data ?? coin2Fiat;
+
+    if (!coin1?.id || !coin2?.id) {
+        throw new Error('Something went wrong :(');
+    }
+
+    const coinsHistoricPriceResponse = await getCoinHistoricChart({
+        coin1Id: coin1?.id,
+        coin2Id: coin2?.id,
+        days: '7',
+    });
 
     const conversion = await getTotalConversion(coin1, coin2);
 
@@ -216,8 +220,8 @@ export default async function Page({ params }: { params: { pair: string } }) {
                 <FollowUsBanner></FollowUsBanner>
                 <CoinsAreaChart
                     coinsHistoricPriceResponse={coinsHistoricPriceResponse}
-                    coin1Id={coin1Id}
-                    coin2Id={coin2Id}
+                    coin1Id={coin1?.id}
+                    coin2Id={coin2?.id}
                 ></CoinsAreaChart>
                 {/* @ts-ignore */}
                 <PriceStats coin1={coin1} coin2={coin2}></PriceStats>

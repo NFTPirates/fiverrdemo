@@ -61,10 +61,7 @@ export default function Conversion(props: IConversion) {
         setCoin2Info(coin1);
     };
 
-    const conversionUrlSymbol =
-        coin1Amount != 1
-            ? `${coin1Amount}-${coin1Info?.symbol.toLowerCase()}-to-${coin2Info?.symbol.toLowerCase()}`
-            : `${coin1Info?.symbol.toLowerCase()}-${coin2Info?.symbol.toLowerCase()}`;
+    const conversionUrlSymbol = `${coin1Amount}-${coin1Info?.symbol.toLowerCase()}-to-${coin2Info?.symbol.toLowerCase()}`;
 
     return (
         <div className={styles.container}>

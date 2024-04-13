@@ -1,9 +1,10 @@
 import styles from './styles.module.css';
 import Conversion from '../components/Conversion/Conversion';
-import { getCoin } from '../services/coin.service';
+import { getCoin, getTop15CoinsByMarketCap } from '../services/coin.service';
 import getFiat from '../services/fiat.service';
 import { Metadata } from 'next';
 import React from 'react';
+import LinksTable from '../components/LinksTable/LinksTable';
 
 export async function generateMetadata(): Promise<Metadata> {
     const defaultCoinInfo = await getCoin({ coinId: 'bitcoin' });
@@ -20,6 +21,12 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Home() {
     const defaultCoinInfo = await getCoin({ coinId: 'bitcoin' });
     const initialFiatcur = getFiat({ fiatId: 'usd' });
+    const cad = getFiat({ fiatId: 'cad' });
+    const gbp = getFiat({ fiatId: 'gbp' });
+    const chf = getFiat({ fiatId: 'chf' });
+    const jpy = getFiat({ fiatId: 'jpy' });
+    const aud = getFiat({ fiatId: 'aud' });
+    const top15Coins = await getTop15CoinsByMarketCap();
 
     return (
         <main>
@@ -34,6 +41,10 @@ export default async function Home() {
                     defaultCoin1Info={defaultCoinInfo}
                     defaultCoin2Info={initialFiatcur}
                 ></Conversion>
+                <LinksTable
+                    fiatCurrency={[cad, gbp, aud, initialFiatcur, chf, jpy]}
+                    top15Coins={top15Coins}
+                ></LinksTable>
             </div>
         </main>
     );

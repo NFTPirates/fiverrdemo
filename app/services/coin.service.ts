@@ -4,6 +4,7 @@ import { GetCoinHistoryResponse } from '../types/coingecko/getCoinHistoryRespons
 import { GetCoinResponse } from '../types/coingecko/getCoinResponse';
 import getFiat from './fiat.service';
 import { format } from 'date-fns';
+import { GetTop15CoinsByMketCapResponse } from '../types/coingecko/getTop15CoinsByMketCapResponse';
 
 interface IGetCoinProps {
     coinId?: string;
@@ -156,4 +157,36 @@ export async function getCoinPriceAtDate(props: IGetCoinPriceAtDateProps) {
 
     /* @ts-ignore */
     return result.market_data?.current_price[props.againstFiat ?? 'usd'];
+}
+
+export async function getTop15CoinsByMarketCap(): Promise<Coin[]> {
+    const url =
+        'https://pro-api.coingecko.com/api/v3/coins/markets?vs_currency=usd&per_page=15';
+    const res = await fetch(url, {
+        headers: {
+            'Content-Type': 'application/json',
+            'x-cg-pro-api-key': process.env.CG_API_KEY!,
+        },
+    });
+
+    if (!res.ok) {
+        throw new Error(
+            'something went wrong when getting top 15 coins by mketcap'
+        );
+    }
+
+    const result = (await res.json()) as GetTop15CoinsByMketCapResponse[];
+
+    const coinsArray = result.map((item) => {
+        const coin: Coin = {
+            id: item.id,
+            symbol: item.symbol,
+            name: item.name,
+            image: item.image,
+        };
+
+        return coin;
+    });
+
+    return coinsArray;
 }

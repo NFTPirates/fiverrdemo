@@ -6,6 +6,11 @@ module.exports = {
                 hostname: 'assets.coingecko.com',
                 port: '',
             },
+            {
+                protocol: 'https',
+                hostname: 'www.currencyremitapp.com',
+                port: '',
+            },
         ],
     },
 };

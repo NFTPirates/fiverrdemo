@@ -1,7 +1,6 @@
 'use client';
 import { Coin } from '@/app/types/coin';
 import { Currency } from '@/app/types/currency';
-import { formatNumberToString } from '@/app/utils/utils';
 import { Input } from '@nextui-org/react';
 import { Dispatch, SetStateAction } from 'react';
 import NextUiDropdown from '../Dropdown/Dropdown';

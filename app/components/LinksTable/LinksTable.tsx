@@ -66,7 +66,7 @@ export default function LinksTable(props: ILinksTableProps) {
                                             <div>
                                                 <Link
                                                     href={`1-${coin.symbol}-to-${cur?.symbol}`}
-                                                >{`${coin.symbol.toUpperCase()}-to-${cur?.symbol.toUpperCase()}`}</Link>
+                                                >{`${coin.symbol.toUpperCase()} to ${cur?.symbol.toUpperCase()}`}</Link>
                                             </div>
                                         </TableCell>
                                     );

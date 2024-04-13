@@ -14,36 +14,39 @@ import Link from 'next/link';
 import styles from './linksTable.module.css';
 
 interface ILinksTableProps {
-    fiatCurrency: (Currency | undefined)[];
-    top15Coins?: Coin[];
+    rowCoinData?: (Currency | Coin | undefined)[];
+    columnCoinData?: Coin[];
+    tableCaption: string;
 }
 
 export default function LinksTable(props: ILinksTableProps) {
     return (
         <div className={styles.container}>
+            <h2 className={styles.container__title}>{props.tableCaption}</h2>
             <Table>
                 <TableHeader>
                     <TableRow>
                         <TableHead></TableHead>
-                        {props.fiatCurrency.map((cur, index) => {
-                            return (
-                                <TableHead key={index} className="w-[20px]">
-                                    <div className="flex flex-row gap-4">
-                                        <Image
-                                            src={cur!.image}
-                                            width={20}
-                                            height={20}
-                                            alt={''}
-                                        ></Image>
-                                        <p>{cur?.id.toUpperCase()}</p>
-                                    </div>
-                                </TableHead>
-                            );
-                        })}
+                        {props.rowCoinData &&
+                            props.rowCoinData.map((cur, index) => {
+                                return (
+                                    <TableHead key={index} className="w-[20px]">
+                                        <div className="flex flex-row gap-4">
+                                            <Image
+                                                src={cur!.image}
+                                                width={20}
+                                                height={20}
+                                                alt={''}
+                                            ></Image>
+                                            <p>{cur?.symbol.toUpperCase()}</p>
+                                        </div>
+                                    </TableHead>
+                                );
+                            })}
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {props.top15Coins?.map((coin, index) => {
+                    {props.columnCoinData?.map((coin, index) => {
                         return (
                             <TableRow key={index} className="h-[5px]">
                                 <TableCell>
@@ -57,20 +60,21 @@ export default function LinksTable(props: ILinksTableProps) {
                                         <p>{coin.symbol.toUpperCase()}</p>
                                     </div>
                                 </TableCell>
-                                {props.fiatCurrency.map((cur, curIndex) => {
-                                    return (
-                                        <TableCell
-                                            key={curIndex}
-                                            className="w-[300px]"
-                                        >
-                                            <div>
-                                                <Link
-                                                    href={`1-${coin.symbol}-to-${cur?.symbol}`}
-                                                >{`${coin.symbol.toUpperCase()} to ${cur?.symbol.toUpperCase()}`}</Link>
-                                            </div>
-                                        </TableCell>
-                                    );
-                                })}
+                                {props.rowCoinData &&
+                                    props.rowCoinData.map((cur, curIndex) => {
+                                        return (
+                                            <TableCell
+                                                key={curIndex}
+                                                className="w-[300px]"
+                                            >
+                                                <div>
+                                                    <Link
+                                                        href={`1-${coin.symbol.toLowerCase()}-to-${cur?.symbol.toLowerCase()}`}
+                                                    >{`${coin.symbol.toUpperCase()} to ${cur?.symbol.toUpperCase()}`}</Link>
+                                                </div>
+                                            </TableCell>
+                                        );
+                                    })}
                             </TableRow>
                         );
                     })}

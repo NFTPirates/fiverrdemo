@@ -5,6 +5,7 @@ import { GetCoinResponse } from '../types/coingecko/getCoinResponse';
 import getFiat from './fiat.service';
 import { format } from 'date-fns';
 import { GetTop15CoinsByMketCapResponse } from '../types/coingecko/getTop15CoinsByMketCapResponse';
+import { GetTrendingCoinsResponse } from '../types/coingecko/trendingCoinsResponse';
 
 interface IGetCoinProps {
     coinId?: string;
@@ -186,6 +187,35 @@ export async function getTop15CoinsByMarketCap(): Promise<Coin[]> {
         };
 
         return coin;
+    });
+
+    return coinsArray;
+}
+
+export async function getTrendingCoins(): Promise<Coin[]> {
+    const url = 'https://pro-api.coingecko.com/api/v3/search/trending';
+    const res = await fetch(url, {
+        headers: {
+            'Content-Type': 'application/json',
+            'x-cg-pro-api-key': process.env.CG_API_KEY!,
+        },
+    });
+
+    if (!res.ok) {
+        throw new Error('something went wrong when getting trending coins');
+    }
+
+    const result = (await res.json()) as GetTrendingCoinsResponse;
+
+    const coinsArray = result.coins.map((coin) => {
+        const trendingCoin: Coin = {
+            id: coin.item.id,
+            symbol: coin.item.symbol,
+            name: coin.item.name,
+            image: coin.item.thumb,
+        };
+
+        return trendingCoin;
     });
 
     return coinsArray;

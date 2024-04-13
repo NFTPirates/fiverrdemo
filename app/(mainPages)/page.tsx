@@ -1,6 +1,10 @@
 import styles from './styles.module.css';
 import Conversion from '../components/Conversion/Conversion';
-import { getCoin, getTop15CoinsByMarketCap } from '../services/coin.service';
+import {
+    getCoin,
+    getTop15CoinsByMarketCap,
+    getTrendingCoins,
+} from '../services/coin.service';
 import getFiat from '../services/fiat.service';
 import { Metadata } from 'next';
 import React from 'react';
@@ -27,6 +31,7 @@ export default async function Home() {
     const jpy = getFiat({ fiatId: 'jpy' });
     const aud = getFiat({ fiatId: 'aud' });
     const top15Coins = await getTop15CoinsByMarketCap();
+    const trendingCoins = await getTrendingCoins();
 
     return (
         <main>
@@ -42,8 +47,14 @@ export default async function Home() {
                     defaultCoin2Info={initialFiatcur}
                 ></Conversion>
                 <LinksTable
-                    fiatCurrency={[cad, gbp, aud, initialFiatcur, chf, jpy]}
-                    top15Coins={top15Coins}
+                    tableCaption="Top 15 Crypto Coins By Marketcap VS Fiat Currency"
+                    rowCoinData={[cad, gbp, aud, initialFiatcur, chf, jpy]}
+                    columnCoinData={top15Coins}
+                ></LinksTable>
+                <LinksTable
+                    tableCaption="Top 15 Crypto Coins By Marketcap VS Top 15 Crypto Coins By User Searches"
+                    rowCoinData={trendingCoins}
+                    columnCoinData={top15Coins}
                 ></LinksTable>
             </div>
         </main>

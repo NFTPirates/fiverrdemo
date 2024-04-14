@@ -171,6 +171,7 @@ export default async function Page({ params }: { params: { pair: string } }) {
 
     const coin1byTicker = await getCoinByTicker({ currentQuery: coin1Id });
     const coin2byTicker = await getCoinByTicker({ currentQuery: coin2Id });
+    console.log(coin2byTicker, 'test1');
 
     const coin1Data = await getCoin({ coinId: coin1byTicker?.id });
     const coin2Data = await getCoin({ coinId: coin2byTicker?.id });

@@ -173,9 +173,11 @@ export async function getCoinByTicker(props: {
         throw new Error('something went wrong');
     }
 
-    const coin = queryResponse.coins[0];
+    const coin = queryResponse.coins.find(
+        (coin) => coin.symbol.toLowerCase() === props.currentQuery
+    );
 
-    if (coin.symbol.toLowerCase() != props.currentQuery) {
+    if (!coin) {
         return;
     }
 

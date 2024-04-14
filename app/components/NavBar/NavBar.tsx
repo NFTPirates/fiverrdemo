@@ -55,7 +55,9 @@ export default function NavigationBar() {
                             width={50}
                             alt=""
                         ></Image>
-                        <p className="font-bold text-inherit">ACME</p>
+                        <p className="font-bold text-inherit">
+                            CryptoFiatConvert.com
+                        </p>
                     </Link>
                 </NavbarBrand>
             </NavbarContent>

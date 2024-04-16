@@ -78,7 +78,7 @@ export default function NextUiDropdown(props: INextUiDropdownProps) {
                             {coin.image && (
                                 <Image
                                     src={coin.image}
-                                    alt={''}
+                                    alt={`${coin.name} logo`}
                                     width={20}
                                     height={20}
                                 ></Image>
@@ -103,6 +103,7 @@ export default function NextUiDropdown(props: INextUiDropdownProps) {
                             width={30}
                             height={30}
                             src={props.coinInfo?.image}
+                            alt={props.coinInfo?.name}
                         ></Image>
                         <p
                             className={

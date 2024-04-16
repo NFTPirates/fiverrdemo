@@ -41,11 +41,7 @@ export default function NavigationBar() {
     };
 
     return (
-        <Navbar
-            maxWidth="full"
-            className="lg:px-20"
-            onMenuOpenChange={setIsMenuOpen}
-        >
+        <Navbar maxWidth="full" onMenuOpenChange={setIsMenuOpen}>
             <NavbarContent>
                 <NavbarBrand>
                     <Link href="./" className="decoration-black">
@@ -64,7 +60,7 @@ export default function NavigationBar() {
 
             <NavbarContent className="md:flex gap-4" justify="end">
                 <NavbarContent
-                    className="hidden md:flex gap-4"
+                    className="hidden md:flex gap-6"
                     justify="center"
                 >
                     {renderNavItems()}
@@ -74,7 +70,7 @@ export default function NavigationBar() {
                     className="md:hidden"
                 />
             </NavbarContent>
-            <NavbarMenu>{renderNavItems()}</NavbarMenu>
+            <NavbarMenu className="gap-6">{renderNavItems()}</NavbarMenu>
         </Navbar>
     );
 }

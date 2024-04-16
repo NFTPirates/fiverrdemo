@@ -18,13 +18,15 @@ export default function Footer() {
             <div className={styles.container__info}>
                 <div className={styles.container__Column}>
                     <h3>Product</h3>
-                    {ProductLinks.map((item, index) => {
-                        return (
-                            <Link key={index} href={item.link}>
-                                {item.name}
-                            </Link>
-                        );
-                    })}
+                    <ul className="flex flex-col gap-3">
+                        {ProductLinks.map((item, index) => {
+                            return (
+                                <li key={index}>
+                                    <Link href={item.link}>{item.name}</Link>
+                                </li>
+                            );
+                        })}
+                    </ul>
                 </div>
                 <div className={styles.container__Column}>
                     <h3>Legal</h3>

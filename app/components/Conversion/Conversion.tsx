@@ -6,7 +6,7 @@ import { Currency } from '@/app/types/currency';
 import { formatNumberToString } from '@/app/utils/utils';
 import { Button } from '@nextui-org/react';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import ConversionBox from '../ConversionBox/ConversionBox';
 import { SwitchIcon } from '../SwitchIcon';
 import styles from './conversion.module.css';
@@ -30,30 +30,41 @@ export default function Conversion(props: IConversion) {
         props.defaultCoin2Info
     );
 
+    const coin1 = useMemo(() => {
+        return {
+            usdPrice: coin1Info?.market_data?.current_price?.usd,
+            id: coin1Info?.id,
+        };
+    }, [coin1Info?.id]);
+
+    const coin2 = useMemo(() => {
+        return {
+            usdPrice: coin2Info?.market_data?.current_price?.usd,
+            id: coin2Info?.id,
+        };
+    }, [coin2Info?.id]);
+
     useEffect(() => {
         async function getTotalConversion() {
-            const coin1Price = coin1Info?.market_data?.current_price?.usd;
-            const coin2Price = coin2Info?.market_data?.current_price?.usd;
+            console.log('test');
 
             const conversion = await getConversion({
                 coin1Amount: coin1Amount,
-                coin1Id: coin1Info?.id,
-                coin2Id: coin2Info?.id,
-                coin1CurPrice: coin1Price,
-                coin2CurPrice: coin2Price,
+                coin1Id: coin1.id,
+                coin2Id: coin2.id,
+                coin1CurPrice: coin1.usdPrice,
+                coin2CurPrice: coin2.usdPrice,
             });
 
             if (!conversion) {
                 return;
             }
 
-            setCookie({ coin1Id: coin1Info?.id, coin2Id: coin2Info?.id });
-
             setCoin2Amount(conversion);
         }
 
         getTotalConversion();
-    }, [coin1Info, coin2Info, coin1Amount]);
+    }, [coin1, coin2, coin1Amount]);
 
     const handleSwitchButton = () => {
         const coin1 = coin1Info;

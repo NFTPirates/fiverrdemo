@@ -12,6 +12,7 @@ const ProductLinks = [
 ];
 
 export default function Footer() {
+    // test private deployment
     return (
         <div className={styles.container}>
             <SubscribeNewsletter></SubscribeNewsletter>

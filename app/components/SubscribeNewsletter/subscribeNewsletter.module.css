@@ -14,6 +14,13 @@
     width: 100%;
 }
 
+.submitButton {
+    background: linear-gradient(103.39deg, #ffa0a9 15.17%, #ff60a4 59.61%);
+    border-radius: 8px;
+    color: var(--foreground) !important;
+    font-size: 16px;
+}
+
 @media (min-width: 1024px) {
     .container {
         display: flex;

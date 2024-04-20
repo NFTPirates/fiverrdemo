@@ -18,13 +18,16 @@ export const Faq = (props: IFaqProps) => {
 
     return (
         <div className={styles.container}>
-            <h2>{`FAQs for ${props.coin1Amount} ${coin1Symbol} to ${coin2Symbol}`}</h2>
+            <h2>
+                Any <span>Questions? </span>
+                {`${props.coin1Amount} ${coin1Symbol} to ${coin2Symbol}`}
+            </h2>
             <Accordion variant="light">
                 <AccordionItem
                     key="1"
                     aria-label="Accordion 1"
                     title={`What is ${props.coin1Amount} ${coin1Symbol} to ${coin2Symbol} price today`}
-                    classNames={{ title: 'text-primary' }}
+                    classNames={{ title: 'color: white' }}
                 >
                     {`The price for ${props.coin1Amount} ${coin1Symbol} to ${coin2Symbol} today on ${new Date().toLocaleDateString()} is ${formatNumberToString({ numberToFormat: props.conversion * Number(props.coin1Amount) })}`}
                 </AccordionItem>

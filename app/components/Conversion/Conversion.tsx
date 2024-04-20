@@ -1,5 +1,4 @@
 'use client';
-import { setCookie } from '@/app/actions/setCookie';
 import { getConversion } from '@/app/services/conversion.service';
 import { Coin } from '@/app/types/coin';
 import { Currency } from '@/app/types/currency';

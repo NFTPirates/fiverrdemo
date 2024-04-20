@@ -5,8 +5,10 @@
     align-items: center;
     width: 100%;
     padding: 30px 50px;
-    background-color: var(--background1);
-    border-radius: 15px;
+    background: hsla(0, 0%, 100%, 0.05);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
 }
 
 .container__conversionBoxes {
@@ -27,10 +29,12 @@
 }
 
 .container__content__button {
-    background-color: var(--red);
-    color: var(--foreground);
     width: 100%;
     margin: 20px 0;
+    background: linear-gradient(103.39deg, #ffa0a9 15.17%, #ff60a4 59.61%);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 16px;
 }
 
 .container__content__section {
@@ -42,7 +46,7 @@
     height: 80px;
     width: 80px;
     margin: 20px 0;
-    background-color: var(--red);
+    background: linear-gradient(-90deg, #ff7df2, #ff275b);
 }
 
 @media (min-width: 1024px) {

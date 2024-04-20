@@ -12,6 +12,12 @@
     position: relative;
 }
 
-.container__header__title {
-    margin-bottom: 20px;
+.container__header_span {
+    background: linear-gradient(270.78deg, #ffa7a9 4.19%, #ff5ea3 96.11%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.container__header_subTitle {
+    opacity: 0.75;
 }

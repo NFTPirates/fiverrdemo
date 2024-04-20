@@ -37,10 +37,16 @@ export default async function Home() {
         <main>
             <div className={styles.container}>
                 <div className={styles.container__header}>
-                    <h1>Global Crypto Converter</h1>
-                    <h2 className={styles.container__header_subTitle}>
+                    <h1>
+                        Global
+                        <span className={styles.container__header_span}>
+                            {' Crypto '}
+                        </span>
+                        Converter
+                    </h1>
+                    <p className={styles.container__header_subTitle}>
                         Convert your fiat coins to crypto and vice verse
-                    </h2>
+                    </p>
                 </div>
                 <Conversion
                     defaultCoin1Info={defaultCoinInfo}

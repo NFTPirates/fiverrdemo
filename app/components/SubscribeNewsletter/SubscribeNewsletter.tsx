@@ -13,15 +13,20 @@ export interface FormValues {
     email: string;
 }
 
-export default function App() {
+export default function SubscribeNewsletter() {
     return (
-        <Card fullWidth isBlurred className="border-none" shadow="sm">
+        <Card
+            fullWidth
+            isBlurred
+            className="border-none bg-transparent"
+            shadow="sm"
+        >
             <CardBody>
                 <div className={styles.container}>
                     <div className={styles.container__textContent}>
                         <h2>
-                            Read the best crypto stories of the day in less than
-                            5 minutes.
+                            Read <span>the best crypto stories</span> of the day
+                            in less than 5 minutes.
                         </h2>
                         <p>Subscribe to get it daily in your inbox</p>
                     </div>
@@ -69,11 +74,11 @@ export function FormContent(props: IFormContentProps) {
             </div>
             <Button
                 type="submit"
-                variant="solid"
-                color="danger"
                 isDisabled={pending}
+                className={styles.submitButton}
+                color="primary"
             >
-                {pending ? 'Submitting...' : 'Submit'}
+                {pending ? 'Subscribing...' : 'Subscribe'}
             </Button>
         </>
     );

@@ -19,6 +19,7 @@ const MenuItems = [
     { name: 'About Us', link: './about' },
 ];
 
+import styles from './navbar.module.css';
 export default function NavigationBar() {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
@@ -26,11 +27,7 @@ export default function NavigationBar() {
         const navBarItems = MenuItems.map((item, index) => {
             return (
                 <NavbarItem key={index}>
-                    <Link
-                        className="text-lg"
-                        color="foreground"
-                        href={item.link}
-                    >
+                    <Link className="text-lg font-bold" href={item.link}>
                         {item.name}
                     </Link>
                 </NavbarItem>
@@ -41,17 +38,21 @@ export default function NavigationBar() {
     };
 
     return (
-        <Navbar maxWidth="full" onMenuOpenChange={setIsMenuOpen}>
+        <Navbar
+            className="bg-[#151937] decoration-white"
+            maxWidth="full"
+            onMenuOpenChange={setIsMenuOpen}
+        >
             <NavbarContent>
                 <NavbarBrand>
-                    <Link href="./" className="decoration-black">
+                    <Link href="./" className={styles.logoLink}>
                         <Image
                             src={'/logo.png'}
                             height={50}
                             width={50}
                             alt=""
                         ></Image>
-                        <p className="font-bold text-inherit">
+                        <p className="font-bold text-inherit decoration-white">
                             CryptoFiatConvert.com
                         </p>
                     </Link>

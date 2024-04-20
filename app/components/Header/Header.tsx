@@ -20,15 +20,22 @@ export default function Header(props: IHeaderProps) {
     return (
         <div className={styles.container}>
             <h1>
-                {` Convert ${props.coin1Amount} ${coin1Symbol} to ${coin2Symbol} ( ${props.coin1Amount} ${props.coin1?.id} to ${props.coin2?.id}
+                Convert
+                <span>{` ${props.coin1Amount} ${coin1Symbol} to ${coin2Symbol} `}</span>
+                {`(${props.coin1Amount} ${props.coin1?.id} to ${props.coin2?.id}
                 Calculator )`}
             </h1>
-            <h2>{`How much is ${props.coin1Amount} ${props.coin1?.id} worth in ${coin2Symbol}?`}</h2>
             <h2>
-                {`Current value of ${props.coin1Amount} ${coin1Symbol} in ${coin2Symbol} is ${conversion}`}
+                How much is
+                <span>{` ${props.coin1Amount} ${props.coin1?.id} `}</span>
+                {`worth in ${coin2Symbol}?`}
+            </h2>
+            <h2>
+                {`Current value of ${props.coin1Amount} ${coin1Symbol} in ${coin2Symbol} is `}
+                <span>{conversion}</span>
             </h2>
 
-            <div className="lg:w-9/12">
+            <div className="lg:w-9/12 opacity-75">
                 <p>
                     {` This is the real-time data fetched from our partnered price
                 aggregators. At the moment, you are looking at the conversion of

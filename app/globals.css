@@ -3,13 +3,13 @@
 @tailwind utilities;
 
 :root {
-    --foreground: #3d405b;
-    --background: #f4f1de;
+    --foreground: #ffffff;
+    --background: #151937;
     --background1: #f2cc8f;
     --red: #e07a5f;
     --green: #81b29a;
 
-    --title-h1-size: 34px;
+    --title-h1-size: 90px;
 }
 
 input::-webkit-outer-spin-button,
@@ -33,11 +33,13 @@ h1 {
     color: var(--foreground);
     font-size: var(--title-h1-size);
     font-weight: bold;
+    margin-bottom: 45px;
+    line-height: 1.16em;
 }
 
 h2 {
     color: var(--foreground);
-    font-size: x-large;
+    font-size: 54px;
     font-weight: bold;
     margin-bottom: 20px;
 }
@@ -50,8 +52,14 @@ h3 {
 
 p {
     font-weight: normal;
-    font-size: medium;
+    font-size: 22px;
     color: var(--foreground);
+}
+
+span {
+    background: linear-gradient(270.78deg, #ffa7a9 4.19%, #ff5ea3 96.11%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 p,

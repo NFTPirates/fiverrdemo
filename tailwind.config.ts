@@ -24,14 +24,18 @@ const config: Config = {
                 light: {
                     layout: {},
                     colors: {
-                        primary: '#3d405b', // black
+                        primary: '#ffffff', // white
                         secondary: '#f4f1de', // white
                         danger: '#e07a5f', //red
                     },
                 },
                 dark: {
                     layout: {},
-                    colors: {},
+                    colors: {
+                        primary: '#ffffff', // white
+                        secondary: '#f4f1de', // white
+                        danger: '#e07a5f', //red
+                    },
                 },
             },
         }),

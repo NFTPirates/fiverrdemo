@@ -22,7 +22,7 @@ export default function Footer() {
                     <ul className="flex flex-col gap-3">
                         {ProductLinks.map((item, index) => {
                             return (
-                                <li key={index}>
+                                <li key={index} className="opacity-75">
                                     <Link href={item.link}>{item.name}</Link>
                                 </li>
                             );
@@ -33,7 +33,11 @@ export default function Footer() {
                     <h3>Legal</h3>
                     {Legal.map((item, index) => {
                         return (
-                            <Link key={index} href={item.link}>
+                            <Link
+                                className="opacity-75"
+                                key={index}
+                                href={item.link}
+                            >
                                 {item.name}
                             </Link>
                         );
@@ -41,14 +45,20 @@ export default function Footer() {
                 </div>
                 <div className="hidden md:flex flex flex-col">
                     <h3>Contact</h3>
-                    <Link href={'mailto:piratesConvert@conver.com'}>
+                    <Link
+                        className="opacity-75"
+                        href={'mailto:piratesConvert@conver.com'}
+                    >
                         piratesConvert@conver.com
                     </Link>
                 </div>
             </div>
             <div className="md:hidden flex flex-col my-10 w-full">
                 <h3>Contact</h3>
-                <Link href={'mailto:piratesConvert@conver.com'}>
+                <Link
+                    className="opacity-75"
+                    href={'mailto:piratesConvert@conver.com'}
+                >
                     piratesConvert@conver.com
                 </Link>
             </div>

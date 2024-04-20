@@ -23,3 +23,7 @@
     color: var(--foreground);
     font-size: large;
 }
+
+.dropDownItems__container__text {
+    color: var(--background);
+}

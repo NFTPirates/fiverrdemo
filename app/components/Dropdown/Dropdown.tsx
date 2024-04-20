@@ -83,8 +83,20 @@ export default function NextUiDropdown(props: INextUiDropdownProps) {
                                     height={20}
                                 ></Image>
                             )}
-                            <p>{coin.name}</p>
-                            <p>{coin.symbol}</p>
+                            <p
+                                className={
+                                    styles.dropDownItems__container__text
+                                }
+                            >
+                                {coin.name}
+                            </p>
+                            <p
+                                className={
+                                    styles.dropDownItems__container__text
+                                }
+                            >
+                                {coin.symbol}
+                            </p>
                         </div>
                     </DropdownItem>
                 );
@@ -117,7 +129,7 @@ export default function NextUiDropdown(props: INextUiDropdownProps) {
             </DropdownTrigger>
             <DropdownMenu
                 aria-label="Single selection dropdown"
-                variant="flat"
+                variant="light"
                 disallowEmptySelection
                 selectionMode="single"
                 selectedKeys={selectedKeys}
@@ -127,7 +139,7 @@ export default function NextUiDropdown(props: INextUiDropdownProps) {
                 <DropdownItem key="search" textValue="test" isReadOnly>
                     <Input
                         classNames={{
-                            base: 'max-w-full sm:max-w-[10rem] h-10',
+                            base: 'max-w-full h-10',
                             mainWrapper: 'h-full',
                             input: 'text-small',
                             inputWrapper:

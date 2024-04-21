@@ -11,7 +11,9 @@
 .chartContainer__header__radio {
     display: flex;
     flex-direction: row;
-    background-color: var(--background1);
+    background: hsla(0, 0%, 100%, 0.05);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
     border-radius: 15px;
     padding: 10px;
 }

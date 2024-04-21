@@ -16,7 +16,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
             {/* @ts-ignore */}
             <NextThemesProvider
                 attribute="class"
-                defaultTheme="light"
+                defaultTheme="dark"
                 themes={['light', 'dark', 'modernnp']}
             >
                 {children}

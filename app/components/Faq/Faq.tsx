@@ -1,9 +1,10 @@
 'use client';
 import React from 'react';
-import { Accordion, AccordionItem } from '@nextui-org/react';
+import { Accordion, AccordionItem, Button } from '@nextui-org/react';
 import styles from './faq.module.css';
 import { Coin } from '@/app/types/coin';
 import { formatNumberToString } from '@/app/utils/utils';
+import Link from 'next/link';
 
 interface IFaqProps {
     coin1?: Coin;
@@ -18,36 +19,54 @@ export const Faq = (props: IFaqProps) => {
 
     return (
         <div className={styles.container}>
-            <h2>
-                Any <span>Questions? </span>
-                {`${props.coin1Amount} ${coin1Symbol} to ${coin2Symbol}`}
-            </h2>
-            <Accordion variant="light">
-                <AccordionItem
-                    key="1"
-                    aria-label="Accordion 1"
-                    title={`What is ${props.coin1Amount} ${coin1Symbol} to ${coin2Symbol} price today`}
-                    classNames={{ title: 'color: white' }}
+            <div className={styles.container__info}>
+                <h2>
+                    Any <span>Questions? </span>
+                    {`${props.coin1Amount} ${coin1Symbol} to ${coin2Symbol}`}
+                </h2>
+                <p className="opacity-75">
+                    Don’t find your answer here? just send us a message for any
+                    query.
+                </p>
+                <Button
+                    color="primary"
+                    variant="bordered"
+                    className={styles.container__info__button}
+                    href={'/contact'}
+                    as={Link}
                 >
-                    {`The price for ${props.coin1Amount} ${coin1Symbol} to ${coin2Symbol} today on ${new Date().toLocaleDateString()} is ${formatNumberToString({ numberToFormat: props.conversion * Number(props.coin1Amount) })}`}
-                </AccordionItem>
-                <AccordionItem
-                    key="2"
-                    aria-label="Accordion 2"
-                    title={`Where to buy ${props.coin1?.id}`}
-                    classNames={{ title: 'text-primary' }}
-                >
-                    {defaultContent}
-                </AccordionItem>
-                <AccordionItem
-                    classNames={{ title: 'text-primary' }}
-                    key="3"
-                    aria-label="Accordion 3"
-                    title={`Where to buy ${props.coin2?.id}`}
-                >
-                    {defaultContent}
-                </AccordionItem>
-            </Accordion>
+                    <span>Contact us</span>
+                </Button>
+            </div>
+
+            <div className="lg:w-1/2">
+                <Accordion variant="light" fullWidth={false}>
+                    <AccordionItem
+                        key="1"
+                        aria-label="Accordion 1"
+                        title={`What is ${props.coin1Amount} ${coin1Symbol} to ${coin2Symbol} price today`}
+                        className={styles.container__accordionTitle}
+                    >
+                        {`The price for ${props.coin1Amount} ${coin1Symbol} to ${coin2Symbol} today on ${new Date().toLocaleDateString()} is ${formatNumberToString({ numberToFormat: props.conversion * Number(props.coin1Amount) })}`}
+                    </AccordionItem>
+                    <AccordionItem
+                        className={styles.container__accordionTitle}
+                        key="2"
+                        aria-label="Accordion 2"
+                        title={`Where to buy ${props.coin1?.id}`}
+                    >
+                        {defaultContent}
+                    </AccordionItem>
+                    <AccordionItem
+                        className={styles.container__accordionTitle}
+                        key="3"
+                        aria-label="Accordion 3"
+                        title={`Where to buy ${props.coin2?.id}`}
+                    >
+                        {defaultContent}
+                    </AccordionItem>
+                </Accordion>
+            </div>
         </div>
     );
 };

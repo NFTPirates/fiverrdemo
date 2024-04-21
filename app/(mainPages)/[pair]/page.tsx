@@ -13,6 +13,7 @@ import Header from '@/app/components/Header/Header';
 import FollowUsBanner from '@/app/components/FollowUsBanner/FollowUsBanner';
 import PriceStats from '@/app/components/PriceStats/PriceStats';
 import { getCoinByTicker } from '@/app/services/search.service';
+import PriceTable2 from '@/app/components/PriceTable/PriceTable2';
 
 export interface IGetCoinHistoricPriceResponse {
     prices: [string[]];
@@ -171,7 +172,6 @@ export default async function Page({ params }: { params: { pair: string } }) {
 
     const coin1byTicker = await getCoinByTicker({ currentQuery: coin1Id });
     const coin2byTicker = await getCoinByTicker({ currentQuery: coin2Id });
-    console.log(coin2byTicker, 'test1');
 
     const coin1Data = await getCoin({ coinId: coin1byTicker?.id });
     const coin2Data = await getCoin({ coinId: coin2byTicker?.id });
@@ -233,17 +233,18 @@ export default async function Page({ params }: { params: { pair: string } }) {
                 {/* @ts-ignore */}
                 <PriceStats coin1={coin1} coin2={coin2}></PriceStats>
                 <div className={styles.container__priceTable}>
-                    <PriceTable
+                    <PriceTable2
                         priceTableData={priceTableData?.normalArray}
                         defaultCoin1Info={coin1}
                         defaultCoin2Info={coin2}
-                    ></PriceTable>
-                    <PriceTable
+                    ></PriceTable2>
+                    <PriceTable2
                         priceTableData={priceTableData?.switchedArray}
                         defaultCoin1Info={coin2}
                         defaultCoin2Info={coin1}
-                    ></PriceTable>
+                    ></PriceTable2>
                 </div>
+
                 <Faq
                     coin1={coin1}
                     coin2={coin2}

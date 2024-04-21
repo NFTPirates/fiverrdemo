@@ -33,8 +33,8 @@ const config: Config = {
                     layout: {},
                     colors: {
                         primary: '#ffffff', // white
-                        secondary: '#f4f1de', // white
-                        danger: '#e07a5f', //red
+                        secondary: '#ffffff', // white
+                        default: '#ffffff', //red
                     },
                 },
             },

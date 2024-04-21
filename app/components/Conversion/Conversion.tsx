@@ -45,8 +45,6 @@ export default function Conversion(props: IConversion) {
 
     useEffect(() => {
         async function getTotalConversion() {
-            console.log('test');
-
             const conversion = await getConversion({
                 coin1Amount: coin1Amount,
                 coin1Id: coin1.id,

@@ -227,7 +227,11 @@ export default async function PriceStats(props: IPriceStatsProps) {
     if (percentageChange24hAgo) {
         return (
             <div className={styles.container}>
-                <h2>{`${props.coin1?.symbol.toUpperCase()} to ${props.coin2?.symbol.toUpperCase()} price stats for the ${format(new Date(), 'MMMM yyyy')}`}</h2>
+                <h2>
+                    <span>{`${props.coin1?.symbol.toUpperCase()} to ${props.coin2?.symbol.toUpperCase()} `}</span>
+                    price stats for the
+                    <span>{`${format(new Date(), 'MMMM yyyy')}`}</span>
+                </h2>
                 <div className={styles.container__content}>
                     <div
                         className={styles.container__content__percentageWrapper}

@@ -20,6 +20,7 @@ const MenuItems = [
 ];
 
 import styles from './navbar.module.css';
+import { SwitchIcon } from '../SwitchIcon';
 export default function NavigationBar() {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 

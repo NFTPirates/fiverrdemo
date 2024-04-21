@@ -18,7 +18,7 @@ export default function RootLayout({
             <body className={inter.className}>
                 <Providers>
                     <NavigationBar></NavigationBar>
-                    <div className="px-3 lg:px-40 py-20"> {children}</div>
+                    <div className="px-5 md:px-20 py-5"> {children}</div>
                     <Footer></Footer>
                 </Providers>
                 <SpeedInsights />

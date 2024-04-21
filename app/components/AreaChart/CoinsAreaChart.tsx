@@ -49,7 +49,8 @@ export default function CoinsAreaChart(props: {
             <div className={styles.chartContainer}>
                 <div className={styles.chartContainer__header}>
                     <h2 className={styles.chartContainer__header__title}>
-                        {`${props.coin1Id?.toUpperCase()} to ${props.coin2Id?.toUpperCase()} daily chart`}
+                        {`${props.coin1Id?.toUpperCase()} to ${props.coin2Id?.toUpperCase()} `}{' '}
+                        <span>daily chart</span>
                     </h2>
                     <RadioGroup
                         className={styles.chartContainer__header__radio}
@@ -78,6 +79,26 @@ export default function CoinsAreaChart(props: {
                                 bottom: 0,
                             }}
                         >
+                            <defs>
+                                <linearGradient
+                                    id="colorUv"
+                                    x1="0"
+                                    y1="0"
+                                    x2="0"
+                                    y2="1"
+                                >
+                                    <stop
+                                        offset="5%"
+                                        stopColor="#8884d8"
+                                        stopOpacity={0.8}
+                                    />
+                                    <stop
+                                        offset="95%"
+                                        stopColor="#8884d8"
+                                        stopOpacity={0}
+                                    />
+                                </linearGradient>
+                            </defs>
                             <XAxis dataKey="date">
                                 <Label
                                     value="Date"
@@ -98,7 +119,8 @@ export default function CoinsAreaChart(props: {
                                 type="monotone"
                                 dataKey="price"
                                 stroke="#e07a5f"
-                                fill="#81b29a"
+                                fill="url(#colorUv)"
+                                fillOpacity={1}
                             />
                         </AreaChart>
                     </ResponsiveContainer>

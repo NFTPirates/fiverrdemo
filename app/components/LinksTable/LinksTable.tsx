@@ -34,7 +34,7 @@ export default function LinksTable(props: ILinksTableProps) {
                                         <div className="flex flex-row gap-4">
                                             <Image
                                                 src={cur!.image}
-                                                width={20}
+                                                width={30}
                                                 height={20}
                                                 alt={''}
                                             ></Image>
@@ -53,7 +53,7 @@ export default function LinksTable(props: ILinksTableProps) {
                                     <div className="flex flex-row gap-4">
                                         <Image
                                             src={coin!.image}
-                                            width={20}
+                                            width={30}
                                             height={20}
                                             alt={''}
                                         ></Image>

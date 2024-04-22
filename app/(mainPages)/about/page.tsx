@@ -16,7 +16,7 @@ export default async function AboutUsPage() {
         <main className="px-5 md:w-9/12 grid gap-10">
             <div>
                 <h1>About Us</h1>
-                <p>
+                <p className="opacity-75">
                     Welcome to Cryptofiatconvert.com, your trusted partner in
                     bridging the gap between cryptocurrency and fiat currency.
                     In today’s rapidly evolving digital economy, we recognize
@@ -30,7 +30,7 @@ export default async function AboutUsPage() {
             <Image src={'/logo.png'} height={100} width={100} alt=""></Image>
             <div>
                 <h1>Our Story</h1>
-                <p>
+                <p className="opacity-75">
                     The inception of Cryptofiatconvert.com was driven by a clear
                     gap in the market—a need for a reliable, intuitive, and
                     comprehensive tool for converting crypto to fiat and vice
@@ -41,7 +41,7 @@ export default async function AboutUsPage() {
                     straightforward tools for transactional purposes, the
                     obstacles were evident.
                 </p>
-                <p>
+                <p className="opacity-75">
                     Determined to make a difference, we embarked on a mission in
                     2024 to develop a platform that not only addressed these
                     issues but also set a new standard for accessibility and
@@ -53,7 +53,7 @@ export default async function AboutUsPage() {
             </div>
             <div>
                 <h1>Our Mission</h1>
-                <p>
+                <p className="opacity-75">
                     At Cryptofiatconvert.com, our mission is to democratize the
                     access and use of cryptocurrency by providing a
                     user-friendly platform for effortless conversions. We
@@ -66,7 +66,7 @@ export default async function AboutUsPage() {
             </div>
             <div>
                 <h1>Our Contribution to the Crypto World</h1>
-                <p>
+                <p className="opacity-75">
                     We are more than just a conversion tool; we are innovators
                     and educators in the crypto space. Our commitment goes
                     beyond facilitating transactions. We aim to educate our
@@ -76,7 +76,7 @@ export default async function AboutUsPage() {
                     insights, market trends, and updates on the latest
                     developments in the crypto world.
                 </p>
-                <p>
+                <p className="opacity-75">
                     We understand that the future of finance is digital, and we
                     are committed to developing new tools and features that
                     anticipate the needs of our users. Our roadmap includes
@@ -87,7 +87,7 @@ export default async function AboutUsPage() {
             </div>
             <div>
                 <h1>The Future</h1>
-                <p>
+                <p className="opacity-75">
                     Looking ahead, Cryptofiatconvert.com is poised to continue
                     leading innovation in the crypto space. Our vision for the
                     future is one where converting between crypto and fiat is
@@ -102,7 +102,7 @@ export default async function AboutUsPage() {
             </div>
             <div>
                 <h1>Join Our Community</h1>
-                <p>
+                <p className="opacity-75">
                     We invite you to join our journey and become part of a
                     community that is shaping the future of finance. You can
                     find us and follow our updates on social media:
@@ -113,13 +113,13 @@ export default async function AboutUsPage() {
                     <Link href={'https://twitter.com'}>Linkedin</Link>
                 </div>
 
-                <p>News about us</p>
+                <p className="opacity-75">News about us</p>
                 <div className="flex flex-col mx-5 my-5">
                     <Link href={'https://twitter.com'}>News</Link>
                     <Link href={'https://twitter.com'}>News</Link>
                 </div>
 
-                <p>
+                <p className="opacity-75">
                     Together, we can build a world where the conversion between
                     crypto and fiat currencies is seamless, empowering everyone
                     to participate in the global economy.

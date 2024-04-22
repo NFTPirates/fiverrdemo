@@ -2,13 +2,13 @@ import React from 'react';
 
 const MarketAnalysis = () => {
     return (
-        <div className="bg-gray-100 min-h-screen p-8">
+        <div className="min-h-screen p-8">
             <div className="max-w-4xl mx-auto">
-                <h1 className="text-3xl font-bold mb-6">
+                <h1 className="font-bold mb-6">
                     In-Depth Analysis: US Stock Market and Crypto Markets -
                     January 2024
                 </h1>
-                <p className="text-gray-700 mb-6">
+                <p className="opacity-75 mb-6">
                     January 2024 witnessed significant movements and
                     developments in both the US stock market and cryptocurrency
                     markets. In this analysis, we delve into the key events and
@@ -16,8 +16,8 @@ const MarketAnalysis = () => {
                 </p>
 
                 <div className="mb-8">
-                    <h2 className="text-2xl font-bold mb-4">US Stock Market</h2>
-                    <p className="text-gray-700 mb-4">
+                    <h2 className="font-bold mb-4">US Stock Market</h2>
+                    <p className="opacity-75 mb-4">
                         The US stock market started the year with optimism,
                         driven by positive economic data and corporate earnings
                         expectations. However, volatility increased as
@@ -28,7 +28,7 @@ const MarketAnalysis = () => {
                     <h3 className="text-xl font-bold mb-2">
                         Market Performance
                     </h3>
-                    <p className="text-gray-700 mb-4">
+                    <p className="opacity-75 mb-4">
                         Major stock indices, including the S&P 500, Dow Jones
                         Industrial Average, and Nasdaq Composite, experienced
                         mixed performance during January. The S&P 500 and Nasdaq
@@ -42,10 +42,10 @@ const MarketAnalysis = () => {
                     </p>
 
                     <h3 className="text-xl font-bold mb-2">Key Events</h3>
-                    <p className="text-gray-700 mb-4">
+                    <p className="opacity-75 mb-4">
                         Several key events influenced market sentiment:
                     </p>
-                    <ul className="list-disc list-inside text-gray-700">
+                    <ul className="list-disc list-inside opacity-75">
                         <li>
                             Geopolitical tensions: Rising tensions in regions
                             like Eastern Europe and the Middle East contributed
@@ -87,7 +87,7 @@ const MarketAnalysis = () => {
                     <h2 className="text-2xl font-bold mb-4">
                         Cryptocurrency Markets
                     </h2>
-                    <p className="text-gray-700 mb-4">
+                    <p className="opacity-75 mb-4">
                         January 2024 was a volatile month for cryptocurrency
                         markets, characterized by sharp price fluctuations and
                         regulatory developments.
@@ -96,7 +96,7 @@ const MarketAnalysis = () => {
                     <h3 className="text-xl font-bold mb-2">
                         Market Performance
                     </h3>
-                    <p className="text-gray-700 mb-4">
+                    <p className="opacity-75 mb-4">
                         Bitcoin, the leading cryptocurrency, experienced
                         significant volatility during January. After hitting an
                         all-time high early in the month, Bitcoin faced selling
@@ -114,10 +114,10 @@ const MarketAnalysis = () => {
                     </p>
 
                     <h3 className="text-xl font-bold mb-2">Key Events</h3>
-                    <p className="text-gray-700 mb-4">
+                    <p className="opacity-75 mb-4">
                         Several key events impacted cryptocurrency markets:
                     </p>
-                    <ul className="list-disc list-inside text-gray-700">
+                    <ul className="list-disc list-inside opacity-75">
                         <li>
                             Regulatory scrutiny: Regulatory developments,
                             particularly in major markets like the United States
@@ -164,7 +164,7 @@ const MarketAnalysis = () => {
 
                 <div className="mb-8">
                     <h2 className="text-2xl font-bold mb-4">Conclusion</h2>
-                    <p className="text-gray-700">
+                    <p className="opacity-75">
                         January 2024 was marked by dynamic movements and
                         developments in both the US stock market and
                         cryptocurrency markets. While the stock market grappled

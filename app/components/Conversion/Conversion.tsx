@@ -101,7 +101,7 @@ export default function Conversion(props: IConversion) {
 
             <div className={styles.container__content}>
                 <div className={styles.container__content__section}>
-                    <h2>{`${formatNumberToString({ numberToFormat: coin1Amount })} ${coin1Info?.symbol.toUpperCase()} = ${formatNumberToString({ numberToFormat: coin2Amount })} ${coin2Info?.symbol.toUpperCase()}`}</h2>
+                    <h3 className="text-4xl">{`${formatNumberToString({ numberToFormat: coin1Amount })} ${coin1Info?.symbol.toUpperCase()} = ${formatNumberToString({ numberToFormat: coin2Amount })} ${coin2Info?.symbol.toUpperCase()}`}</h3>
                 </div>
 
                 <Button

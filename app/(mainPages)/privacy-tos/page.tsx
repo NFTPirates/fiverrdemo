@@ -15,7 +15,7 @@ export default function PrivacyTosPage() {
             <div>
                 <h1>{'Privacy Policy & Terms and Conditions'}</h1>
                 <p>{`Last updated: 04-04-2024`}</p>
-                <p>
+                <p className="opacity-75">
                     Welcome to Cryptofiatconvert.com. Your privacy and trust are
                     paramount to us. This document outlines how we collect, use,
                     and protect your personal information, as well as the terms
@@ -25,12 +25,12 @@ export default function PrivacyTosPage() {
             </div>
             <div>
                 <h2>Information Collection and Use</h2>
-                <p>
+                <p className="opacity-75">
                     We collect information to provide better services to all our
                     users. The types of information we collect include:
                 </p>
                 <br></br>
-                <p>
+                <p className="opacity-75">
                     Personal Information: When you sign up for a
                     Cryptofiatconvert.com account, we may ask for personal
                     information, such as your email address, to send updates or
@@ -44,7 +44,7 @@ export default function PrivacyTosPage() {
                 </p>
                 <br></br>
 
-                <p>
+                <p className="opacity-75">
                     We implement a variety of security measures to maintain the
                     safety of your personal information. However, no method of
                     transmission over the Internet or method of electronic
@@ -54,7 +54,7 @@ export default function PrivacyTosPage() {
             </div>
             <div>
                 <h2>Data Sharing</h2>
-                <p>
+                <p className="opacity-75">
                     We do not sell, trade, or otherwise transfer to outside
                     parties your personally identifiable information. This does
                     not include trusted third parties who assist us in operating
@@ -65,7 +65,7 @@ export default function PrivacyTosPage() {
             </div>
             <div>
                 <h2>Your Rights</h2>
-                <p>
+                <p className="opacity-75">
                     You have the right to access, update, or delete the
                     information we have on you. Whenever made possible, you can
                     access, update, or request deletion of your personal
@@ -75,16 +75,16 @@ export default function PrivacyTosPage() {
             <div>
                 <h1>Terms and Conditions</h1>
                 <h2>Use of the Service</h2>
-                <p>
+                <p className="opacity-75">
                     Cryptofiatconvert.com provides a platform for converting
                     cryptocurrency to fiat currency. Users must ensure that
                     their activities on the site comply with all applicable laws
                     and regulations.
                 </p>
                 <br></br>
-                <p>Service Changes and Availability</p>
+                <p className="opacity-75">Service Changes and Availability</p>
                 <br></br>
-                <p>
+                <p className="opacity-75">
                     We reserve the right to modify or discontinue, temporarily
                     or permanently, the service (or any part thereof) with or
                     without notice. We shall not be liable to you or to any
@@ -94,7 +94,7 @@ export default function PrivacyTosPage() {
             </div>
             <div>
                 <h2>Account Security</h2>
-                <p>
+                <p className="opacity-75">
                     {
                         'You are responsible for safeguarding the password that you use to access the service and for any activities or actions under your password. We encourage you to use "strong" passwords (passwords that use a combination of upper and lower case letters, numbers, and symbols) with your account.'
                     }
@@ -102,7 +102,7 @@ export default function PrivacyTosPage() {
             </div>
             <div>
                 <h2>Intellectual Property</h2>
-                <p>
+                <p className="opacity-75">
                     The service and its original content, features, and
                     functionality are and will remain the exclusive property of
                     Cryptofiatconvert.com and its licensors. Our trademarks and
@@ -113,7 +113,7 @@ export default function PrivacyTosPage() {
             </div>
             <div>
                 <h2>Limitation of Liability</h2>
-                <p>
+                <p className="opacity-75">
                     In no event will Cryptofiatconvert.com, nor its directors,
                     employees, partners, agents, suppliers, or affiliates, be
                     liable for any indirect, incidental, special, consequential,
@@ -125,7 +125,7 @@ export default function PrivacyTosPage() {
             </div>
             <div>
                 <h2>Governing Law</h2>
-                <p>
+                <p className="opacity-75">
                     These Terms shall be governed and construed in accordance
                     with the laws of [Your Country], without regard to its
                     conflict of law provisions.
@@ -133,7 +133,7 @@ export default function PrivacyTosPage() {
             </div>
             <div>
                 <h2>Changes to This Policy</h2>
-                <p>
+                <p className="opacity-75">
                     We reserve the right to update or change our Privacy Policy
                     and Terms and Conditions at any time. You are advised to
                     review this page periodically for any changes.
@@ -141,7 +141,7 @@ export default function PrivacyTosPage() {
             </div>
             <div>
                 <h2>Contact Us</h2>
-                <p>
+                <p className="opacity-75">
                     For any questions or comments about these Terms, please
                     contact us at contact@cryptofiatconvert.com.
                 </p>
